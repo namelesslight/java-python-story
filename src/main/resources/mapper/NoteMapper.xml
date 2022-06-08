@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.javapythonstory.code.mapper.NoteMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.javapythonstory.code.entity.po.Note">
+        <id column="n_id" property="nId" />
+        <result column="n_user" property="nUser" />
+        <result column="n_model" property="nModel" />
+        <result column="n_title" property="nTitle" />
+        <result column="n_content" property="nContent" />
+        <result column="create_time" property="createTime" />
+        <result column="is_delete" property="isDelete" />
+    </resultMap>
+
+</mapper>

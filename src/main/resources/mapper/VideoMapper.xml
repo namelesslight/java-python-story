@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.javapythonstory.code.mapper.VideoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.javapythonstory.code.entity.po.Video">
+        <id column="v_id" property="vId" />
+        <result column="v_name" property="vName" />
+        <result column="v_path" property="vPath" />
+        <result column="v_model" property="vModel" />
+        <result column="v_picture" property="vPicture" />
+        <result column="v_introduce" property="vIntroduce" />
+        <result column="create_time" property="createTime" />
+        <result column="is_delete" property="isDelete" />
+    </resultMap>
+
+</mapper>

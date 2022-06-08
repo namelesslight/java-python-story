@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.javapythonstory.code.mapper.QuestionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.javapythonstory.code.entity.po.Question">
+        <id column="q_id" property="qId" />
+        <result column="q_content" property="qContent" />
+        <result column="q_model" property="qModel" />
+        <result column="q_type" property="qType" />
+        <result column="q_answer" property="qAnswer" />
+        <result column="create_time" property="createTime" />
+        <result column="is_delete" property="isDelete" />
+    </resultMap>
+
+</mapper>
