@@ -7,7 +7,9 @@ public class UpdatePasswordDto {
 
     private String id;
 
-    private String password;
+    private String oldPassword;
+
+    private String newPassword;
 
     private String rwPassword;
 

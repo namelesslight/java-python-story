@@ -2,11 +2,15 @@ package com.example.javapythonstory.code.controller;
 
 
 import com.example.javapythonstory.code.entity.dto.user.*;
+import com.example.javapythonstory.code.entity.vo.user.UserVo;
 import com.example.javapythonstory.code.result.Result;
 import com.example.javapythonstory.code.service.UserService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>
@@ -23,64 +27,114 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @PostMapping("/base/register")
+    @PostMapping("/base/userRegister")
     public Result userRegister(@RequestBody UserRegisterDto userRegisterDto){
-        return null;
+        Map<String, Object> message = new HashMap<>();
+        Integer registerCode = userService.userRegister(
+                userRegisterDto.getUsername(),
+                userRegisterDto.getEmail(),
+                userRegisterDto.getPassword(),
+                userRegisterDto.getRwPassword());
+        message.put("registerCode", registerCode);
+        return new Result().result200(message, "/base/userRegister");
     }
 
-    @PostMapping("/base/login")
+    @PostMapping("/base/userLogin")
     public Result userLogin(@RequestBody UserLoginDto userLoginDto){
-        return null;
-    }
-
-    @PostMapping("/base/adminLogin")
-    public Result adminRegister(@RequestBody AdminRegisterDto adminRegisterDto){
-        return null;
+        Map<String, Object> message = new HashMap<>();
+        Map<String, Object> loginReturn = userService.userLogin(
+                userLoginDto.getEmail(),
+                userLoginDto.getPassword());
+        message.put("loginReturn", loginReturn);
+        return new Result().result200(message, "/base/userLogin");
     }
 
     @PostMapping("/base/adminRegister")
+    public Result adminRegister(@RequestBody AdminRegisterDto adminRegisterDto){
+        Map<String, Object> message = new HashMap<>();
+        Integer registerCode = userService.adminRegister(
+                adminRegisterDto.getAdminName(),
+                adminRegisterDto.getPassword(),
+                adminRegisterDto.getRwPassword());
+        message.put("registerCode",registerCode);
+        return new Result().result200(message ,"/base/adminRegister");
+    }
+
+    @PostMapping("/base/adminLogin")
     public Result adminLogin(@RequestBody AdminLoginDto adminLoginDto){
-        return null;
+        Map<String, Object> message = new HashMap<>();
+        Map<String, Object> loginReturn = userService.adminLogin(
+                adminLoginDto.getAdminName(),
+                adminLoginDto.getPassword());
+        message.put("loginReturn", loginReturn);
+        return new Result().result200(message, "/base/adminLogin");
     }
 
     @PostMapping("/common/updateUserInfo")
     public Result updateUserInfo(@RequestBody UpdateUserInfoDto updateUserInfoDto){
-        return null;
+        Map<String, Object> message = new HashMap<>();
+        Integer updateCode = userService.updateUserInfo(
+                updateUserInfoDto.getUserId(),
+                updateUserInfoDto.getUsername());
+        message.put("updateCode", updateCode);
+        return new Result().result200(message, "/common/updateUserInfo");
     }
 
     @PostMapping("/common/updateUserDirection")
     public Result updateUserDirection(@RequestBody UpdateUserDirectionDto updateUserDirectionDto){
-        return null;
+        Map<String, Object> message = new HashMap<>();
+        Integer updateCode = userService.updateUserDirection(
+                updateUserDirectionDto.getUserId(),
+                updateUserDirectionDto.getUserDirection());
+        message.put("updateCode", updateCode);
+        return new Result().result200(message, "/common/updateUserDirection");
     }
 
     @PostMapping("/common/updateHeadPicture")
-    public Result updateHeadPicture(@RequestBody UpdateUserPictureDto updateUserPictureDto){
-        return null;
+    public Result updateHeadPicture(@RequestParam String id,
+                                    @RequestParam MultipartFile headPicture){
+        Map<String, Object> message = new HashMap<>();
+        Integer updateCode = userService.updateHeadPicture(id,headPicture);
+        message.put("updateCode", updateCode);
+        return new Result().result200(message, "/common/updateHeadPicture");
     }
 
     @PostMapping("/common/updateEmail")
-    public Result updateEmail(@RequestBody UpdateEmailDto updateEmailDto){
-        return null;
+    public Result updateEmail(@RequestBody UpdateUserEmailDto updateUserEmailDto){
+        Map<String, Object> message = new HashMap<>();
+        Integer updateCode = userService.updateEmail(
+                updateUserEmailDto.getUserId(),
+                updateUserEmailDto.getNewEmail());
+        message.put("updateCode", updateCode);
+        return new Result().result200(message, "/common/updateEmail");
     }
 
     @PostMapping("/common/updatePassword")
     public Result updatePassword(@RequestBody UpdatePasswordDto updatePasswordDto){
-        return null;
-    }
-
-    @PostMapping("/super/deleteUser")
-    public Result deleteUserById(){
-        return null;
+        Map<String, Object> message = new HashMap<>();
+        Integer updateCode = userService.updatePassword(
+                updatePasswordDto.getId(),
+                updatePasswordDto.getOldPassword(),
+                updatePasswordDto.getNewPassword(),
+                updatePasswordDto.getRwPassword());
+        message.put("updateCode", updateCode);
+        return new Result().result200(message, "/common/updatePassword");
     }
 
     @PostMapping("/common/queryOneUser")
     public Result queryOneUser(@RequestParam String userId){
-        return null;
+        Map<String, Object> message = new HashMap<>();
+        UserVo userInfo = userService.queryOneUser(userId);
+        message.put("userInfo", userInfo);
+        return new Result().result200(message, "/common/queryOneUser");
     }
 
     @PostMapping("/super/listUserByDirection")
     public Result listUserByDirection(@RequestParam String directionId){
-        return null;
+        Map<String, Object> message = new HashMap<>();
+        UserVo userInfo = userService.queryOneUser(directionId);
+        message.put("userInfo", userInfo);
+        return new Result().result200(message, "/super/listUserByDirection");
     }
 
 }

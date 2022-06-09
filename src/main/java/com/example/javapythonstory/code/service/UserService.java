@@ -3,8 +3,10 @@ package com.example.javapythonstory.code.service;
 import com.example.javapythonstory.code.entity.po.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.javapythonstory.code.entity.vo.user.UserVo;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -16,27 +18,27 @@ import java.util.List;
  */
 public interface UserService extends IService<User> {
 
-    Integer userRegister();
+    Integer userRegister(String name, String email, String password, String rwPassword);
 
-    Integer userLogin();
+    Map<String, Object> userLogin(String email, String password);
 
-    Integer adminRegister();
+    Integer adminRegister(String name, String password, String rwPassword);
 
-    Integer adminLogin();
+    Map<String, Object> adminLogin(String name, String password);
 
-    Integer updateUserInfo();
+    Integer updateUserInfo(String userId, String name);
 
-    Integer updateUserDirection();
+    Integer updateUserDirection(String userId, String direction);
 
-    Integer updateHeadPicture();
+    Integer updateHeadPicture(String userId, MultipartFile headPicture);
 
-    Integer updateEmail();
+    Integer updateEmail(String userId, String email);
 
-    Integer updatePassword();
+    Integer updatePassword(String userId, String oldPassword, String newPassword, String rwPassword);
 
-    Integer deleteUserById();
+    Integer deleteUserById(String userId);
 
-    UserVo queryOneUser();
+    UserVo queryOneUser(String userId);
 
-    List<UserVo> listUserByDirection();
+    List<UserVo> listUserByDirection(String directionId);
 }

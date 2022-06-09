@@ -3,10 +3,10 @@ package com.example.javapythonstory.code.entity.dto.user;
 import lombok.Data;
 
 @Data
-public class UpdateUserDirectionDto {
+public class UpdateUserEmailDto {
 
     private String userId;
 
-    private String userDirection;
+    private String newEmail;
 
 }
