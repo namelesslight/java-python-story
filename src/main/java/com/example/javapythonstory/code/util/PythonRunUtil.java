@@ -16,7 +16,7 @@ public class PythonRunUtil {
             fos.write((code).getBytes(StandardCharsets.UTF_8));
             fos.flush();
             fos.close();
-            String[] arguments = new String[]{"python3", "process.py"};
+            String[] arguments = new String[]{"python", "process.py"};
             Process process = Runtime.getRuntime().exec(arguments);
             BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
             BufferedReader error = new BufferedReader(new InputStreamReader(process.getErrorStream()));

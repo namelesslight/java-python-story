@@ -11,7 +11,7 @@
     </resultMap>
 
     <insert id="addDirection">
-        INSERT INTO `tb_direction` VALUES(#{directionId}, #{directionName}, 0, NOW());
+        INSERT INTO `tb_direction` VALUES(#{directionId}, #{directionName},NOW(), 0);
     </insert>
 
     <update id="updateDirection">

@@ -16,7 +16,7 @@
     </resultMap>
 
     <insert id="addUser">
-        INSERT INTO `tb_user` VALUES(#{userId}, #{username}, #{password}, '', '', 'common', '', 0, NOW());
+        INSERT INTO `tb_user` VALUES(#{userId}, #{username}, #{password}, '', #{email}, 'common', '',NOW(), 0);
     </insert>
 
     <select id="queryCountByEmail" resultType="java.lang.Integer">
@@ -32,25 +32,26 @@
             `u`.`u_email` AS `email`,
             `u`.`u_header` AS `header`,
             `u`.`u_role` AS `role`,
-            `d`.`u_direction` AS `direction`,
+            `d`.`d_name` AS `direction`,
             `u`.`create_time` AS `createTime`,
             `u`.`is_delete` AS `isDelete`
         FROM `tb_user` AS `u`
-                 LEFT JOIN `tb_direction` AS `d`
-                           ON `u`.`u_direction` = `d`.`d_id`
-        WHERE `u`.`email` = #{email}
-        AND `u`.`password` = #{password}
+            LEFT JOIN `tb_direction` AS `d`
+            ON `u`.`u_direction` = `d`.`d_id`
+        WHERE `u`.`u_email` = #{email}
+        AND `u`.`u_password` = #{password}
         AND `u`.`is_delete` = 0
     </select>
     
     <insert id="addAdmin">
-        INSERT INTO `tb_user` VALUES(#{userId}, #{username}, #{password}, '', '', 'common', '', 0, NOW());
+        INSERT INTO `tb_user` VALUES(#{userId}, #{username}, #{password}, '', '', 'super', '', NOW(), 0);
     </insert>
     
     <select id="queryCountBySuperName" resultType="java.lang.Integer">
         SELECT COUNT(*)
         FROM `tb_user`
         WHERE `u_name` = #{username}
+          AND `u_role` = 'super'
     </select>
 
     <select id="queryCountByNameAndPassword" resultType="com.example.javapythonstory.code.entity.vo.user.UserVo">
@@ -60,15 +61,16 @@
             `u`.`u_email` AS `email`,
             `u`.`u_header` AS `header`,
             `u`.`u_role` AS `role`,
-            `d`.`u_direction` AS `direction`,
+            `d`.`d_name` AS `direction`,
             `u`.`create_time` AS `createTime`,
             `u`.`is_delete` AS `isDelete`
         FROM `tb_user` AS `u`
         LEFT JOIN `tb_direction` AS `d`
         ON `u`.`u_direction` = `d`.`d_id`
-        WHERE `u`.`name` = #{username}
-          AND `u`.`password` = #{password}
+        WHERE `u`.`u_name` = #{username}
+          AND `u`.`u_password` = #{password}
           AND `u`.`is_delete` = 0
+          AND `u`.`u_role` = 'super'
     </select>
 
     <update id="updateUserHeaderById">
@@ -115,13 +117,13 @@
             `u`.`u_email` AS `email`,
             `u`.`u_header` AS `header`,
             `u`.`u_role` AS `role`,
-            `d`.`u_direction` AS `direction`,
+            `d`.`d_name` AS `direction`,
             `u`.`create_time` AS `createTime`,
             `u`.`is_delete` AS `isDelete`
         FROM `tb_user` AS `u`
         LEFT JOIN `tb_direction` AS `d`
         ON `u`.`u_direction` = `d`.`d_id`
-        WHERE `u`.`id` = #{id}
+        WHERE `u`.`u_id` = #{id}
           AND `u`.`is_delete` = 0
     </select>
 
@@ -132,13 +134,14 @@
             `u`.`u_email` AS `email`,
             `u`.`u_header` AS `header`,
             `u`.`u_role` AS `role`,
-            `d`.`u_direction` AS `direction`,
+            `d`.`d_name` AS `direction`,
             `u`.`create_time` AS `createTime`,
             `u`.`is_delete` AS `isDelete`
         FROM `tb_user` AS `u`
         LEFT JOIN `tb_direction` AS `d`
         ON `u`.`u_direction` = `d`.`d_id`
-        WHERE `u`.`direction` = #{direction}
+        WHERE `u`.`u_direction` = #{direction}
           AND `u`.`is_delete` = 0
+          AND `u`.`u_role` = 'common'
     </select>
 </mapper>

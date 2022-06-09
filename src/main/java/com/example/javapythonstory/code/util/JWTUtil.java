@@ -17,7 +17,7 @@ import java.util.Map;
 public class JWTUtil {
 
     //加密用密文
-    private final static String SING="zhaochanglang";
+    private final static String SING="secretcode";
 
 
     /**

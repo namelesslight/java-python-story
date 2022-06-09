@@ -123,7 +123,7 @@ public class UserController {
         return new Result().result200(message, "/common/updatePassword");
     }
 
-    @PostMapping("/common/queryOneUser")
+    @GetMapping("/common/queryOneUser")
     public Result queryOneUser(@RequestParam String userId){
         Map<String, Object> message = new HashMap<>();
         UserVo userInfo = userService.queryOneUser(userId);
@@ -131,7 +131,7 @@ public class UserController {
         return new Result().result200(message, "/common/queryOneUser");
     }
 
-    @PostMapping("/super/listUserByDirection")
+    @GetMapping("/super/listUserByDirection")
     public Result listUserByDirection(@RequestParam String directionId){
         Map<String, Object> message = new HashMap<>();
         List<UserVo> userInfo = userService.listUserByDirection(directionId);

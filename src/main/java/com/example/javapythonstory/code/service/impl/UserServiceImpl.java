@@ -76,7 +76,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         registerInfo.put("registerCode",registerCode);
         if (registerCode == 1){
             String userId = UUIDUtil.getUUID();
-            String secretPassword = SecretUtil.secretString(userId);
+            String secretPassword = SecretUtil.secretString(password);
             userMapper.addUser(userId, name, email, secretPassword);
         }
         return registerInfo;
@@ -95,7 +95,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             claims.put("id", id);
             claims.put("role", role);
             String token = JWTUtil.createToken(claims);
-            loginInfo.put("userInfo", loginCode);
+            loginInfo.put("userInfo", userInfo);
             loginInfo.put("token", token);
         } else {
             loginCode = 0;
@@ -134,7 +134,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         if (registerCode == 1){
             String userId = UUIDUtil.getUUID();
-            String secretPassword = SecretUtil.secretString(userId);
+            String secretPassword = SecretUtil.secretString(password);
             registerCode = userMapper.addAdmin(userId, name, secretPassword);
         }
         registerInfo.put("registerCode",registerCode);
@@ -154,7 +154,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             claims.put("id", id);
             claims.put("role", role);
             String token = JWTUtil.createToken(claims);
-            loginInfo.put("userInfo", loginCode);
+            loginInfo.put("userInfo", userInfo);
             loginInfo.put("token", token);
         } else {
             loginCode = 0;
@@ -195,10 +195,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public Map<String, Object> updatePassword(String userId, String oldPassword, String newPassword, String rwPassword) {
         Map<String, Object> updateInfo = new HashMap<>();
         Integer updateCode = 1;
-        Boolean ordPasswordJudge = userMapper.queryCountByIdAndPassword(userId, oldPassword) == 1;
+        String secretOldPassword = SecretUtil.secretString(oldPassword);
+        Boolean oldPasswordJudge = userMapper.queryCountByIdAndPassword(userId, secretOldPassword) == 1;
         Boolean newPasswordJudge = passwordLen(oldPassword);
-        Boolean rwPasswordJudge = oldPassword.equals(rwPassword);
-        if (ordPasswordJudge){
+        Boolean rwPasswordJudge = newPassword.equals(rwPassword);
+        if (oldPasswordJudge){
             updateInfo.put("oldPassword","旧密码一致");
         } else {
             updateCode = 0;

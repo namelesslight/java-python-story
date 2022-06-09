@@ -67,7 +67,7 @@ public class DirectionController {
         return new Result().result200(message, "/common/listDirection");
     }
 
-    @GetMapping("/common/listDirection")
+    @GetMapping("/common/queryOneDirectionById")
     public Result queryOneDirectionById(@RequestParam String directionId){
         Map<String, Object> message = new HashMap<>();
         Direction data = directionService.queryOneDirectionById(directionId);
