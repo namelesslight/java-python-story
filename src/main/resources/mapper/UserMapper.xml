@@ -27,18 +27,20 @@
 
     <select id="queryCountByEmailAndPassword" resultType="com.example.javapythonstory.code.entity.vo.user.UserVo">
         SELECT
-               `u_id` AS `id`,
-               `u_name` AS `name`,
-               `u_email` AS `email`,
-               `u_header` AS `header`,
-               `u_role` AS `role`,
-               `u_direction` AS `direction`,
-               `create_time` AS `createTime`,
-               `is_delete` AS `isDelete`
-        FROM `tb_user`
-        WHERE `email` = #{email}
-        AND `password` = #{password}
-        AND `is_delete` = 0
+            `u`.`u_id` AS `id`,
+            `u`.`u_name` AS `name`,
+            `u`.`u_email` AS `email`,
+            `u`.`u_header` AS `header`,
+            `u`.`u_role` AS `role`,
+            `d`.`u_direction` AS `direction`,
+            `u`.`create_time` AS `createTime`,
+            `u`.`is_delete` AS `isDelete`
+        FROM `tb_user` AS `u`
+                 LEFT JOIN `tb_direction` AS `d`
+                           ON `u`.`u_direction` = `d`.`d_id`
+        WHERE `u`.`email` = #{email}
+        AND `u`.`password` = #{password}
+        AND `u`.`is_delete` = 0
     </select>
     
     <insert id="addAdmin">
@@ -53,18 +55,20 @@
 
     <select id="queryCountByNameAndPassword" resultType="com.example.javapythonstory.code.entity.vo.user.UserVo">
         SELECT
-            `u_id` AS `id`,
-            `u_name` AS `name`,
-            `u_email` AS `email`,
-            `u_header` AS `header`,
-            `u_role` AS `role`,
-            `u_direction` AS `direction`,
-            `create_time` AS `createTime`,
-            `is_delete` AS `isDelete`
-        FROM `tb_user`
-        WHERE `name` = #{username}
-          AND `password` = #{password}
-          AND `is_delete` = 0
+            `u`.`u_id` AS `id`,
+            `u`.`u_name` AS `name`,
+            `u`.`u_email` AS `email`,
+            `u`.`u_header` AS `header`,
+            `u`.`u_role` AS `role`,
+            `d`.`u_direction` AS `direction`,
+            `u`.`create_time` AS `createTime`,
+            `u`.`is_delete` AS `isDelete`
+        FROM `tb_user` AS `u`
+        LEFT JOIN `tb_direction` AS `d`
+        ON `u`.`u_direction` = `d`.`d_id`
+        WHERE `u`.`name` = #{username}
+          AND `u`.`password` = #{password}
+          AND `u`.`is_delete` = 0
     </select>
 
     <update id="updateUserHeaderById">
@@ -106,31 +110,35 @@
 
     <select id="queryOneUserById" resultType="com.example.javapythonstory.code.entity.vo.user.UserVo">
         SELECT
-            `u_id` AS `id`,
-            `u_name` AS `name`,
-            `u_email` AS `email`,
-            `u_header` AS `header`,
-            `u_role` AS `role`,
-            `u_direction` AS `direction`,
-            `create_time` AS `createTime`,
-            `is_delete` AS `isDelete`
-        FROM `tb_user`
-        WHERE `id` = #{id}
-          AND `is_delete` = 0
+            `u`.`u_id` AS `id`,
+            `u`.`u_name` AS `name`,
+            `u`.`u_email` AS `email`,
+            `u`.`u_header` AS `header`,
+            `u`.`u_role` AS `role`,
+            `d`.`u_direction` AS `direction`,
+            `u`.`create_time` AS `createTime`,
+            `u`.`is_delete` AS `isDelete`
+        FROM `tb_user` AS `u`
+        LEFT JOIN `tb_direction` AS `d`
+        ON `u`.`u_direction` = `d`.`d_id`
+        WHERE `u`.`id` = #{id}
+          AND `u`.`is_delete` = 0
     </select>
 
     <select id="listUsersByDirection" resultType="com.example.javapythonstory.code.entity.vo.user.UserVo">
         SELECT
-            `u_id` AS `id`,
-            `u_name` AS `name`,
-            `u_email` AS `email`,
-            `u_header` AS `header`,
-            `u_role` AS `role`,
-            `u_direction` AS `direction`,
-            `create_time` AS `createTime`,
-            `is_delete` AS `isDelete`
-        FROM `tb_user`
-        WHERE `direction` = #{direction}
-          AND `is_delete` = 0
+            `u`.`u_id` AS `id`,
+            `u`.`u_name` AS `name`,
+            `u`.`u_email` AS `email`,
+            `u`.`u_header` AS `header`,
+            `u`.`u_role` AS `role`,
+            `d`.`u_direction` AS `direction`,
+            `u`.`create_time` AS `createTime`,
+            `u`.`is_delete` AS `isDelete`
+        FROM `tb_user` AS `u`
+        LEFT JOIN `tb_direction` AS `d`
+        ON `u`.`u_direction` = `d`.`d_id`
+        WHERE `u`.`direction` = #{direction}
+          AND `u`.`is_delete` = 0
     </select>
 </mapper>
