@@ -43,19 +43,51 @@ public class FileUtil {
         //本地测试使用
         //return filePath;
         //服务器上使用
-        String id = path.replace("/usr/local/src/spring-boot/image/","");
-        return "/images/" + id + "/" + imageName;
+        String id = path.replace("/usr/local/src/file/","");
+        return "/file/image/" + id + "/" + imageName;
+    }
+
+    /**
+     *
+     * @param videoFile 接收前端上传的图片
+     * @param path 服务器储存图片的路径
+     * @return 返回路径，用于前端删除图片
+     * @throws IOException 抛出io流异常
+     */
+    public static String addVideo(MultipartFile videoFile,String path) throws IOException {
+        File videoFolder = new File(path);
+        if (!videoFolder.exists()) {
+            videoFolder.mkdir();
+        }
+        InputStream fis= null;
+        String filePath = null;
+        fis = videoFile.getInputStream();
+        String videoName = videoFile.getName() + ".mp4";
+        filePath = path + "/" + videoName;
+        //服务器上使用
+        File img = new File(filePath);
+        FileOutputStream fos = new FileOutputStream(img);
+        byte[] bytes=new byte[1024*8];
+        int len;
+        while ((len = fis.read(bytes)) != -1){
+            fos.write(bytes,0,len);
+        }
+        fis.close();
+        fos.close();
+        //本地测试使用
+        //return filePath;
+        //服务器上使用
+        String id = path.replace("/usr/local/src/file/","");
+        return "/file/video/" + id + "/" + videoName;
     }
 
     /**
      * 删除图片
-     * @param imgPath 要删除的图片的路径
+     * @param filename 要删除的图片的路径
      * @return 返回删除后剩余图片的路径
      */
-    @DeleteMapping("/deleteImg")
-    public static Boolean deleteImg(String imgPath){
-        String path = "src/main/resources/static/img";
-        File file=new File(imgPath);
+    public static Boolean deleteFile(String filename){
+        File file=new File(filename);
         return file.delete();
     }
 

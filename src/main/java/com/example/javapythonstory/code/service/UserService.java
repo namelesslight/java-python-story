@@ -13,4 +13,27 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface UserService extends IService<User> {
 
+    Integer userRegister();
+
+    Integer userLogin();
+
+    Integer adminRegister();
+
+    Integer adminLogin();
+
+    Integer updateUserInfo();
+
+    Integer updateUserDirection();
+
+    Integer updateHeadPicture();
+
+    Integer updateEmail();
+
+    Integer updatePassword();
+
+    Integer deleteUserById();
+
+    Integer queryOneUser();
+
+    Integer listUserByDirection();
 }
