@@ -2,6 +2,9 @@ package com.example.javapythonstory.code.service;
 
 import com.example.javapythonstory.code.entity.po.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.javapythonstory.code.entity.vo.user.UserVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -33,7 +36,7 @@ public interface UserService extends IService<User> {
 
     Integer deleteUserById();
 
-    Integer queryOneUser();
+    UserVo queryOneUser();
 
-    Integer listUserByDirection();
+    List<UserVo> listUserByDirection();
 }

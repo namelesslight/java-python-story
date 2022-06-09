@@ -10,4 +10,32 @@
         <result column="is_delete" property="isDelete" />
     </resultMap>
 
+    <insert id="addDirection">
+        INSERT INTO `tb_direction` VALUES(#{directionId}, #{directionName}, 0, NOW());
+    </insert>
+
+    <update id="updateDirection">
+        UPDATE `tb_direction`
+        SET `d_name` = #{directionName}
+        WHERE `d_id` = #{directionId}
+    </update>
+
+    <update id="deleteDirection">
+        UPDATE `tb_direction`
+        SET `is_delete` = 1
+        WHERE `d_id` = #{directionId}
+    </update>
+
+    <select id="listDirection" resultType="com.example.javapythonstory.code.entity.po.Direction">
+        SELECT `d_id`,`d_name`,`create_time`,`is_delete`
+        FROM `tb_direction`
+        WHERE `is_delete` = 0
+    </select>
+
+    <select id="queryOneDirectionById" resultType="com.example.javapythonstory.code.entity.po.Direction">
+        SELECT `d_id`,`d_name`,`create_time`,`is_delete`
+        FROM `tb_direction`
+        WHERE `is_delete` = 0
+        AND `d_id` = #{directionId}
+    </select>
 </mapper>

@@ -22,7 +22,7 @@ public class RoleInterceptor implements HandlerInterceptor {
             Integer code = JWTUtil.verify(token);
             if (code == 1){
                 String role = JWTUtil.getString(token,"role");
-                if (!url.contains(role)){
+                if (!(url.contains("/" + role + "/") | "super".equals(role))){
                     response.sendRedirect(request.getContextPath() + "/base/noPerm");
                     return false;
                 }
