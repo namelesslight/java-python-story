@@ -17,6 +17,8 @@ public class UserVo {
 
     private String direction;
 
+    private String role;
+
     private LocalDateTime createTime;
 
     private Boolean isDelete;

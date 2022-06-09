@@ -15,4 +15,122 @@
         <result column="is_delete" property="isDelete" />
     </resultMap>
 
+    <insert id="addUser">
+        INSERT INTO `tb_user` VALUES(#{userId}, #{username}, #{password}, '', '', 'common', '', 0, NOW());
+    </insert>
+
+    <select id="queryCountByEmail" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM `tb_user`
+        WHERE `u_email` = #{email}
+    </select>
+
+    <select id="queryCountByEmailAndPassword" resultType="com.example.javapythonstory.code.entity.vo.user.UserVo">
+        SELECT
+               `u_id` AS `id`,
+               `u_name` AS `name`,
+               `u_email` AS `email`,
+               `u_header` AS `header`,
+               `u_role` AS `role`,
+               `u_direction` AS `direction`,
+               `create_time` AS `createTime`,
+               `is_delete` AS `isDelete`
+        FROM `tb_user`
+        WHERE `email` = #{email}
+        AND `password` = #{password}
+        AND `is_delete` = 0
+    </select>
+    
+    <insert id="addAdmin">
+        INSERT INTO `tb_user` VALUES(#{userId}, #{username}, #{password}, '', '', 'common', '', 0, NOW());
+    </insert>
+    
+    <select id="queryCountBySuperName" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM `tb_user`
+        WHERE `u_name` = #{username}
+    </select>
+
+    <select id="queryCountByNameAndPassword" resultType="com.example.javapythonstory.code.entity.vo.user.UserVo">
+        SELECT
+            `u_id` AS `id`,
+            `u_name` AS `name`,
+            `u_email` AS `email`,
+            `u_header` AS `header`,
+            `u_role` AS `role`,
+            `u_direction` AS `direction`,
+            `create_time` AS `createTime`,
+            `is_delete` AS `isDelete`
+        FROM `tb_user`
+        WHERE `name` = #{username}
+          AND `password` = #{password}
+          AND `is_delete` = 0
+    </select>
+
+    <update id="updateUserHeaderById">
+        UPDATE `tb_user`
+        SET `u_header` = #{headPath}
+        WHERE `u_id` = #{id}
+    </update>
+
+    <update id="updateUserInfoById">
+        UPDATE `tb_user`
+        SET `u_name` = #{username}
+        WHERE `u_id` = #{id}
+    </update>
+
+    <update id="updateUserDirectionById">
+        UPDATE `tb_user`
+        SET `u_direction` = #{direction}
+        WHERE `u_id` = #{id}
+    </update>
+
+    <update id="updateEmailById">
+        UPDATE `tb_user`
+        SET `u_email` = #{email}
+        WHERE `u_id` = #{id}
+    </update>
+
+    <update id="updatePasswordById">
+        UPDATE `tb_user`
+        SET `u_password` = #{password}
+        WHERE `u_id` = #{id}
+    </update>
+
+    <select id="queryCountByIdAndPassword" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM `tb_user`
+        WHERE `u_id` = #{id}
+        AND `u_password` = #{password}
+    </select>
+
+    <select id="queryOneUserById" resultType="com.example.javapythonstory.code.entity.vo.user.UserVo">
+        SELECT
+            `u_id` AS `id`,
+            `u_name` AS `name`,
+            `u_email` AS `email`,
+            `u_header` AS `header`,
+            `u_role` AS `role`,
+            `u_direction` AS `direction`,
+            `create_time` AS `createTime`,
+            `is_delete` AS `isDelete`
+        FROM `tb_user`
+        WHERE `id` = #{id}
+          AND `is_delete` = 0
+    </select>
+
+    <select id="listUsersByDirection" resultType="com.example.javapythonstory.code.entity.vo.user.UserVo">
+        SELECT
+            `u_id` AS `id`,
+            `u_name` AS `name`,
+            `u_email` AS `email`,
+            `u_header` AS `header`,
+            `u_role` AS `role`,
+            `u_direction` AS `direction`,
+            `create_time` AS `createTime`,
+            `is_delete` AS `isDelete`
+        FROM `tb_user`
+        WHERE `direction` = #{direction}
+          AND `is_delete` = 0
+    </select>
 </mapper>

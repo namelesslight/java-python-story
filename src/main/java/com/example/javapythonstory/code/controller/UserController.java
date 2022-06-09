@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,43 +32,43 @@ public class UserController {
     @PostMapping("/base/userRegister")
     public Result userRegister(@RequestBody UserRegisterDto userRegisterDto){
         Map<String, Object> message = new HashMap<>();
-        Integer registerCode = userService.userRegister(
+        Map<String, Object> registerInfo = userService.userRegister(
                 userRegisterDto.getUsername(),
                 userRegisterDto.getEmail(),
                 userRegisterDto.getPassword(),
                 userRegisterDto.getRwPassword());
-        message.put("registerCode", registerCode);
+        message.put("registerInfo", registerInfo);
         return new Result().result200(message, "/base/userRegister");
     }
 
     @PostMapping("/base/userLogin")
     public Result userLogin(@RequestBody UserLoginDto userLoginDto){
         Map<String, Object> message = new HashMap<>();
-        Map<String, Object> loginReturn = userService.userLogin(
+        Map<String, Object> loginInfo = userService.userLogin(
                 userLoginDto.getEmail(),
                 userLoginDto.getPassword());
-        message.put("loginReturn", loginReturn);
+        message.put("loginInfo", loginInfo);
         return new Result().result200(message, "/base/userLogin");
     }
 
     @PostMapping("/base/adminRegister")
     public Result adminRegister(@RequestBody AdminRegisterDto adminRegisterDto){
         Map<String, Object> message = new HashMap<>();
-        Integer registerCode = userService.adminRegister(
+        Map<String, Object> registerInfo = userService.adminRegister(
                 adminRegisterDto.getAdminName(),
                 adminRegisterDto.getPassword(),
                 adminRegisterDto.getRwPassword());
-        message.put("registerCode",registerCode);
+        message.put("registerInfo",registerInfo);
         return new Result().result200(message ,"/base/adminRegister");
     }
 
     @PostMapping("/base/adminLogin")
     public Result adminLogin(@RequestBody AdminLoginDto adminLoginDto){
         Map<String, Object> message = new HashMap<>();
-        Map<String, Object> loginReturn = userService.adminLogin(
+        Map<String, Object> loginInfo = userService.adminLogin(
                 adminLoginDto.getAdminName(),
                 adminLoginDto.getPassword());
-        message.put("loginReturn", loginReturn);
+        message.put("loginInfo", loginInfo);
         return new Result().result200(message, "/base/adminLogin");
     }
 
@@ -92,7 +94,7 @@ public class UserController {
 
     @PostMapping("/common/updateHeadPicture")
     public Result updateHeadPicture(@RequestParam String id,
-                                    @RequestParam MultipartFile headPicture){
+                                    @RequestParam MultipartFile headPicture) throws IOException {
         Map<String, Object> message = new HashMap<>();
         Integer updateCode = userService.updateHeadPicture(id,headPicture);
         message.put("updateCode", updateCode);
@@ -112,12 +114,12 @@ public class UserController {
     @PostMapping("/common/updatePassword")
     public Result updatePassword(@RequestBody UpdatePasswordDto updatePasswordDto){
         Map<String, Object> message = new HashMap<>();
-        Integer updateCode = userService.updatePassword(
+        Map<String, Object> updateInfo = userService.updatePassword(
                 updatePasswordDto.getId(),
                 updatePasswordDto.getOldPassword(),
                 updatePasswordDto.getNewPassword(),
                 updatePasswordDto.getRwPassword());
-        message.put("updateCode", updateCode);
+        message.put("updateInfo", updateInfo);
         return new Result().result200(message, "/common/updatePassword");
     }
 
@@ -132,7 +134,7 @@ public class UserController {
     @PostMapping("/super/listUserByDirection")
     public Result listUserByDirection(@RequestParam String directionId){
         Map<String, Object> message = new HashMap<>();
-        UserVo userInfo = userService.queryOneUser(directionId);
+        List<UserVo> userInfo = userService.listUserByDirection(directionId);
         message.put("userInfo", userInfo);
         return new Result().result200(message, "/super/listUserByDirection");
     }
