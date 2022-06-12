@@ -19,7 +19,9 @@ import java.util.Map;
  */
 public interface UserService extends IService<User> {
 
-    Map<String, Object> userRegister(String name, String email, String password, String rwPassword);
+    Map<String, Object> userRegister(String name, String email,String code, String password, String rwPassword);
+
+    String sendMessage(String email);
 
     Map<String, Object> userLogin(String email, String password);
 
@@ -38,8 +40,6 @@ public interface UserService extends IService<User> {
     Map<String, Object> updatePassword(Integer userId, String oldPassword, String newPassword, String rwPassword);
 
     Integer deleteUserById(Integer userId);
-
-    Integer sendMessage();
 
     UserVo queryOneUser(Integer userId);
 

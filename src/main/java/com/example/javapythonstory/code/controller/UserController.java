@@ -5,14 +5,25 @@ import com.example.javapythonstory.code.entity.dto.user.*;
 import com.example.javapythonstory.code.entity.vo.user.UserVo;
 import com.example.javapythonstory.code.result.WebResult;
 import com.example.javapythonstory.code.service.UserService;
+import com.example.javapythonstory.code.util.EmailUtil;
+import com.example.javapythonstory.code.util.RedisUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.mail.internet.MimeMessage;
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -26,6 +37,12 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController {
 
+    @Autowired
+    private JavaMailSender jms;
+
+    @Value("${spring.mail.username}")
+    private String from;
+
     @Resource
     private UserService userService;
 
@@ -35,10 +52,18 @@ public class UserController {
         Map<String, Object> registerInfo = userService.userRegister(
                 userRegisterDto.getUsername(),
                 userRegisterDto.getEmail(),
+                userRegisterDto.getCode(),
                 userRegisterDto.getPassword(),
                 userRegisterDto.getRwPassword());
         message.put("registerInfo", registerInfo);
         return new WebResult().result200(message, "/base/userRegister");
+    }
+
+    @PostMapping("/base/sendMessage")
+    public WebResult sendMessage(@RequestBody SendMessageDto sendMessageDto) {
+        String email = sendMessageDto.getEmail();
+        String message = userService.sendMessage(email);
+        return new WebResult().result200(message,"/base/sendMessage");
     }
 
     @PostMapping("/base/userLogin")
@@ -137,11 +162,6 @@ public class UserController {
         List<UserVo> userInfo = userService.listUserByDirection(directionId);
         message.put("userInfo", userInfo);
         return new WebResult().result200(message, "/super/listUserByDirection");
-    }
-
-    @PostMapping("/base/sneCodeMessage")
-    public WebResult sendCodeMessage(){
-        return null;
     }
 
 }

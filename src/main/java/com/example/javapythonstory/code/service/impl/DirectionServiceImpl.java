@@ -4,7 +4,6 @@ import com.example.javapythonstory.code.entity.po.Direction;
 import com.example.javapythonstory.code.mapper.DirectionMapper;
 import com.example.javapythonstory.code.service.DirectionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.javapythonstory.code.util.UUIDUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -7,6 +7,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
 import javax.mail.internet.MimeMessage;
+import java.util.Random;
 
 @Component
 public class EmailUtil {
@@ -14,13 +15,22 @@ public class EmailUtil {
     @Autowired
     private static JavaMailSender jms;
 
-    @Value("${spring.mail.username}")
-    private static String from;
+    private static final String from = "zhaochanglang12@163.com";
+
+
+    public static String getRandomCode(){
+        Random random = new Random();
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < 6; i++){
+            Integer num = random.nextInt(10);
+            sb.append(num);
+        }
+        return sb.toString();
+    }
 
     public static String sendEmail(String to, String subject, String text){
         try{
-            MimeMessage message = null;
-            message = jms.createMimeMessage();
+            MimeMessage message = jms.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message,true);
             helper.setFrom(from);
             helper.setTo(to);
@@ -29,7 +39,6 @@ public class EmailUtil {
             jms.send(message);
             return "success";
         }catch (Exception e){
-            System.out.println(e.getMessage());
             return "fail";
         }
     }

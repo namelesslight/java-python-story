@@ -5,7 +5,6 @@ import com.example.javapythonstory.code.entity.vo.model.ModelVo;
 import com.example.javapythonstory.code.mapper.ModelMapper;
 import com.example.javapythonstory.code.service.ModelService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.javapythonstory.code.util.UUIDUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

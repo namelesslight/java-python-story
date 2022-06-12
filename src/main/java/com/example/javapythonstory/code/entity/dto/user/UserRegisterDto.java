@@ -9,6 +9,8 @@ public class UserRegisterDto {
 
     private String username;
 
+    private String code;
+
     private String password;
 
     private String rwPassword;

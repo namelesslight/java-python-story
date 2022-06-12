@@ -5,18 +5,23 @@ import com.example.javapythonstory.code.entity.vo.user.UserVo;
 import com.example.javapythonstory.code.mapper.UserMapper;
 import com.example.javapythonstory.code.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.javapythonstory.code.util.FileUtil;
-import com.example.javapythonstory.code.util.JWTUtil;
-import com.example.javapythonstory.code.util.SecretUtil;
+import com.example.javapythonstory.code.util.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 /**
@@ -33,15 +38,25 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Resource
     private UserMapper userMapper;
 
+    @Value("${spring.mail.username}")
+    private String from;
+
+    @Autowired
+    private JavaMailSender jms;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     private static final String EMAIL = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
 
     @Override
-    public Map<String, Object> userRegister(String name, String email, String password, String rwPassword) {
+    public Map<String, Object> userRegister(String name, String email,String code, String password, String rwPassword) {
         Map<String, Object> registerInfo = new HashMap<>();
+        String realCode = (String) RedisUtil.getValue(email);
         Integer registerCode = 1;
         Boolean nameJudge = nameLen(name);
         Boolean emailJudge = Pattern.matches(EMAIL, email);
+        Boolean codeJudge = code.equals(realCode);
         Boolean passwordJudge = passwordLen(password);
         Boolean rwPasswordJudge = password.equals(rwPassword);
         if (nameJudge){
@@ -55,6 +70,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         } else {
             registerCode = 0;
             registerInfo.put("emailInfo","邮箱格式错误");
+        }
+        if (codeJudge){
+            registerInfo.put("codeInfo","验证码正确");
+        } else {
+            registerCode = 0;
+            registerInfo.put("codeInfo","验证码错误,请查看邮箱是否正确");
         }
         if (passwordJudge){
             registerInfo.put("passwordInfo","密码格式正确");
@@ -70,18 +91,36 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         if (userMapper.queryCountByEmail(email) == 1){
             registerCode = 0;
+            registerInfo.put("emailInfo","邮箱已被使用");
         }
         registerInfo.put("registerCode",registerCode);
         if (registerCode == 1){
             String secretPassword = SecretUtil.secretString(password);
             userMapper.addUser(name, email, secretPassword);
+            //Redis删除对应邮箱验证码
+            RedisUtil.remove(email);
         }
         return registerInfo;
     }
 
     @Override
-    public Integer sendMessage() {
-        return null;
+    public String sendMessage(String email) {
+        String code = this.getRandomCode();
+        //相对应邮箱发送信息
+        try{
+            MimeMessage message = null;
+            message = jms.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message,true);
+            helper.setFrom(from);
+            helper.setTo(email);
+            helper.setSubject("Python学习网站");
+            helper.setText("验证码为:" + code);
+            jms.send(message);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        redisTemplate.opsForValue().set(email, code, 30L, TimeUnit.MINUTES);
+        return "success";
     }
 
     @Override
@@ -253,7 +292,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return length <= 50;
     }
 
-    private String getRandomCode(){
+    private static String getRandomCode(){
         Random random = new Random();
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < 6; i++){
@@ -262,5 +301,4 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         return sb.toString();
     }
-
 }
