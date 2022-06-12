@@ -139,4 +139,9 @@ public class UserController {
         return new WebResult().result200(message, "/super/listUserByDirection");
     }
 
+    @PostMapping("/base/sneCodeMessage")
+    public WebResult sendCodeMessage(){
+        return null;
+    }
+
 }

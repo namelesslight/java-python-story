@@ -21,7 +21,7 @@ import java.util.List;
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService {
 
     @Resource
-    private ArticleService articleService;
+    private ArticleMapper articleMapper;
 
     @Override
     public Integer addArticle(Integer modelId, String articleName, String articleTitle, String articleContent) {

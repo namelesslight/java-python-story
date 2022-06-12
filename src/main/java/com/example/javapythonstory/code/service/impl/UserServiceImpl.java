@@ -8,7 +8,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.javapythonstory.code.util.FileUtil;
 import com.example.javapythonstory.code.util.JWTUtil;
 import com.example.javapythonstory.code.util.SecretUtil;
-import com.example.javapythonstory.code.util.UUIDUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,7 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -36,7 +34,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private UserMapper userMapper;
 
 
-    private static String EMAIL = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
+    private static final String EMAIL = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
 
     @Override
     public Map<String, Object> userRegister(String name, String email, String password, String rwPassword) {
@@ -79,6 +77,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             userMapper.addUser(name, email, secretPassword);
         }
         return registerInfo;
+    }
+
+    @Override
+    public Integer sendMessage() {
+        return null;
     }
 
     @Override
@@ -247,7 +250,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     private Boolean nameLen(String name) {
         int length = name.length();
-        return (length >= 0) && (length <= 50);
+        return length <= 50;
+    }
+
+    private String getRandomCode(){
+        Random random = new Random();
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < 6; i++){
+            Integer num = random.nextInt(10);
+            sb.append(num);
+        }
+        return sb.toString();
     }
 
 }

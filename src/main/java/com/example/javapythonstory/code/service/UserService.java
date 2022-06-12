@@ -39,6 +39,8 @@ public interface UserService extends IService<User> {
 
     Integer deleteUserById(Integer userId);
 
+    Integer sendMessage();
+
     UserVo queryOneUser(Integer userId);
 
     List<UserVo> listUserByDirection(Integer directionId);
