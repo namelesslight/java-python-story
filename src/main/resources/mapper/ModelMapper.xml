@@ -17,7 +17,7 @@
 
     <update id="updateModel">
         UPDATE `tb_model`
-        SET `m_direction` = #{modelName}
+        SET `m_name` = #{modelName}
         WHERE `m_id` = #{modelId}
     </update>
 

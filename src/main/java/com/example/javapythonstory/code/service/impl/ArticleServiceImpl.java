@@ -6,6 +6,9 @@ import com.example.javapythonstory.code.service.ArticleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -17,4 +20,31 @@ import org.springframework.stereotype.Service;
 @Service
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService {
 
+    @Resource
+    private ArticleService articleService;
+
+    @Override
+    public Integer addArticle(Integer modelId, String articleName, String articleTitle, String articleContent) {
+        return null;
+    }
+
+    @Override
+    public Integer updateArticle(Integer articleId, String articleTitle, String articleContent) {
+        return null;
+    }
+
+    @Override
+    public Integer deleteArticle(Integer articleId) {
+        return null;
+    }
+
+    @Override
+    public List<Article> listArticleByModel(Integer modelId) {
+        return null;
+    }
+
+    @Override
+    public Article queryOneArticleById(Integer articleId) {
+        return null;
+    }
 }
