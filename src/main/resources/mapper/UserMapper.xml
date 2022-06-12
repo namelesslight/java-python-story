@@ -16,7 +16,7 @@
     </resultMap>
 
     <insert id="addUser">
-        INSERT INTO `tb_user` VALUES(#{userId}, #{username}, #{password}, '', #{email}, 'common', '',NOW(), 0);
+        INSERT INTO `tb_user` VALUES(NULL, #{username}, #{password}, '', #{email}, 'common', NULL,NOW(), 0);
     </insert>
 
     <select id="queryCountByEmail" resultType="java.lang.Integer">
@@ -32,7 +32,8 @@
             `u`.`u_email` AS `email`,
             `u`.`u_header` AS `header`,
             `u`.`u_role` AS `role`,
-            `d`.`d_name` AS `direction`,
+            `d`.`d_name` AS `directionName`,
+            `u`.`u_direction` AS `directionId`,
             `u`.`create_time` AS `createTime`,
             `u`.`is_delete` AS `isDelete`
         FROM `tb_user` AS `u`
@@ -44,7 +45,7 @@
     </select>
     
     <insert id="addAdmin">
-        INSERT INTO `tb_user` VALUES(#{userId}, #{username}, #{password}, '', '', 'super', '', NOW(), 0);
+        INSERT INTO `tb_user` VALUES(NULL, #{username}, #{password}, '', '', 'super', NULL, NOW(), 0);
     </insert>
     
     <select id="queryCountBySuperName" resultType="java.lang.Integer">
@@ -61,7 +62,8 @@
             `u`.`u_email` AS `email`,
             `u`.`u_header` AS `header`,
             `u`.`u_role` AS `role`,
-            `d`.`d_name` AS `direction`,
+            `d`.`d_name` AS `directionName`,
+            `u`.`u_direction` AS `directionId`,
             `u`.`create_time` AS `createTime`,
             `u`.`is_delete` AS `isDelete`
         FROM `tb_user` AS `u`
@@ -117,7 +119,8 @@
             `u`.`u_email` AS `email`,
             `u`.`u_header` AS `header`,
             `u`.`u_role` AS `role`,
-            `d`.`d_name` AS `direction`,
+            `d`.`d_name` AS `directionName`,
+            `u`.`u_direction` AS `directionId`,
             `u`.`create_time` AS `createTime`,
             `u`.`is_delete` AS `isDelete`
         FROM `tb_user` AS `u`
@@ -134,7 +137,8 @@
             `u`.`u_email` AS `email`,
             `u`.`u_header` AS `header`,
             `u`.`u_role` AS `role`,
-            `d`.`d_name` AS `direction`,
+            `d`.`d_name` AS `directionName`,
+            `u`.`u_direction` AS `directionId`,
             `u`.`create_time` AS `createTime`,
             `u`.`is_delete` AS `isDelete`
         FROM `tb_user` AS `u`

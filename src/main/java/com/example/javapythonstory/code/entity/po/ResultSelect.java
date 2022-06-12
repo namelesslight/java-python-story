@@ -32,7 +32,7 @@ public class ResultSelect implements Serializable {
 
     @ApiModelProperty("对应结果编号")
     @TableField("rs_result")
-    private String rsResult;
+    private Integer rsResult;
 
     @ApiModelProperty("对应题目编号")
     @TableField("rs_question")

@@ -28,7 +28,7 @@ public class User implements Serializable {
 
     @ApiModelProperty("用户编号")
     @TableId("u_id")
-    private String uId;
+    private Integer uId;
 
     @ApiModelProperty("用户名")
     @TableField("u_name")
@@ -52,7 +52,7 @@ public class User implements Serializable {
 
     @ApiModelProperty("用户选择方向编号")
     @TableField("u_direction")
-    private String uDirection;
+    private Integer uDirection;
 
     @ApiModelProperty("创建时间")
     @TableField("create_time")

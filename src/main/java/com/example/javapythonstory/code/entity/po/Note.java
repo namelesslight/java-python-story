@@ -28,15 +28,15 @@ public class Note implements Serializable {
 
     @ApiModelProperty("笔记编号")
     @TableId("n_id")
-    private String nId;
+    private Integer nId;
 
     @ApiModelProperty("笔记用户编号")
     @TableField("n_user")
-    private String nUser;
+    private Integer nUser;
 
     @ApiModelProperty("笔记对应模块编号")
     @TableField("n_model")
-    private String nModel;
+    private Integer nModel;
 
     @ApiModelProperty("笔记标题")
     @TableField("n_title")

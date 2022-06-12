@@ -28,7 +28,7 @@ public class Resource implements Serializable {
 
     @ApiModelProperty("资源编号")
     @TableId("r_id")
-    private String rId;
+    private Integer rId;
 
     @ApiModelProperty("资源路径")
     @TableField("r_path")
@@ -40,7 +40,7 @@ public class Resource implements Serializable {
 
     @ApiModelProperty("资源对应文章主键")
     @TableField("r_article")
-    private String rArticle;
+    private Integer rArticle;
 
     @ApiModelProperty("创建时间")
     @TableField("create_time")

@@ -17,12 +17,12 @@ public interface DirectionService extends IService<Direction> {
 
     Integer addDirection(String directionName);
 
-    Integer updateDirection(String directionId, String directionName);
+    Integer updateDirection(Integer directionId, String directionName);
 
-    Integer deleteDirection(String directionId);
+    Integer deleteDirection(Integer directionId);
 
     List<Direction> listDirection();
 
-    Direction queryOneDirectionById(String directionId);
+    Direction queryOneDirectionById(Integer directionId);
 
 }

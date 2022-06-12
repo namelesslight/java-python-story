@@ -27,19 +27,19 @@ public interface UserService extends IService<User> {
 
     Map<String, Object> adminLogin(String name, String password);
 
-    Integer updateUserInfo(String userId, String name);
+    Integer updateUserInfo(Integer userId, String name);
 
-    Integer updateUserDirection(String userId, String direction);
+    Integer updateUserDirection(Integer userId, Integer direction);
 
-    Integer updateHeadPicture(String userId, MultipartFile headPicture) throws IOException;
+    Integer updateHeadPicture(Integer userId, MultipartFile headPicture) throws IOException;
 
-    Integer updateEmail(String userId, String email);
+    Integer updateEmail(Integer userId, String email);
 
-    Map<String, Object> updatePassword(String userId, String oldPassword, String newPassword, String rwPassword);
+    Map<String, Object> updatePassword(Integer userId, String oldPassword, String newPassword, String rwPassword);
 
-    Integer deleteUserById(String userId);
+    Integer deleteUserById(Integer userId);
 
-    UserVo queryOneUser(String userId);
+    UserVo queryOneUser(Integer userId);
 
-    List<UserVo> listUserByDirection(String directionId);
+    List<UserVo> listUserByDirection(Integer directionId);
 }

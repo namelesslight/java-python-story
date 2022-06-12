@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class DeleteDirectionDto {
 
-    private String directionId;
+    private Integer directionId;
 
 }

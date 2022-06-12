@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class UpdateDirectionDto {
 
-    private String directionId;
+    private Integer directionId;
 
     private String directionName;
 

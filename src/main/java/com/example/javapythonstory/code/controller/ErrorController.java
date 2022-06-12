@@ -1,6 +1,6 @@
 package com.example.javapythonstory.code.controller;
 
-import com.example.javapythonstory.code.result.Result;
+import com.example.javapythonstory.code.result.WebResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,11 +16,11 @@ public class ErrorController {
      * @return
      */
     @RequestMapping("/error")
-    public Result error(){
+    public WebResult error(){
         Map<String,Object> message = new HashMap<>();
         message.put("code","-1");
         message.put("info","token错误，需要重新登录");
-        return new Result().result200(message,"/base/error");
+        return new WebResult().result200(message,"/base/error");
     }
 
     /**
@@ -28,11 +28,11 @@ public class ErrorController {
      * @return
      */
     @RequestMapping("/timeout")
-    public Result timeout(){
+    public WebResult timeout(){
         Map<String,Object> message = new HashMap<>();
         message.put("code","-2");
         message.put("info","错误，token已过期");
-        return new Result().result200(message,"/base/timeout");
+        return new WebResult().result200(message,"/base/timeout");
     }
 
     /**
@@ -40,11 +40,11 @@ public class ErrorController {
      * @return
      */
     @RequestMapping("/noPerm")
-    public Result noPerm(){
+    public WebResult noPerm(){
         Map<String,Object> message = new HashMap<>();
         message.put("code","-3");
         message.put("info","错误，无权限");
-        return new Result().result200(message,"/base/noPerm");
+        return new WebResult().result200(message,"/base/noPerm");
     }
 
     /**
@@ -52,11 +52,11 @@ public class ErrorController {
      * @return
      */
     @RequestMapping("/noLogin")
-    public Result noLogin(){
+    public WebResult noLogin(){
         Map<String,Object> message = new HashMap<>();
         message.put("code","0");
         message.put("info","未登录");
-        return new Result().result200(message,"/base/noLogin");
+        return new WebResult().result200(message,"/base/noLogin");
     }
 
 }

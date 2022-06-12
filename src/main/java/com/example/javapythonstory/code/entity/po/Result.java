@@ -33,7 +33,7 @@ public class Result implements Serializable {
 
     @ApiModelProperty("结果对应用户编号")
     @TableField("r_user")
-    private String rUser;
+    private Integer rUser;
 
     @ApiModelProperty("结果内容")
     @TableField("r_content")

@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class UpdatePasswordDto {
 
-    private String id;
+    private Integer id;
 
     private String oldPassword;
 

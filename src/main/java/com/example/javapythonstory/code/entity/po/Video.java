@@ -28,7 +28,7 @@ public class Video implements Serializable {
 
     @ApiModelProperty("视频编号")
     @TableId("v_id")
-    private String vId;
+    private Integer vId;
 
     @ApiModelProperty("视频名")
     @TableField("v_name")
@@ -40,7 +40,7 @@ public class Video implements Serializable {
 
     @ApiModelProperty("视频对应模块")
     @TableField("v_model")
-    private String vModel;
+    private Integer vModel;
 
     @ApiModelProperty("封面图片路径")
     @TableField("v_picture")

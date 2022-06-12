@@ -28,7 +28,7 @@ public class Question implements Serializable {
 
     @ApiModelProperty("题目编号")
     @TableId("q_id")
-    private String qId;
+    private Integer qId;
 
     @ApiModelProperty("题目内容")
     @TableField("q_content")
@@ -36,7 +36,7 @@ public class Question implements Serializable {
 
     @ApiModelProperty("题目对应模块编号")
     @TableField("q_model")
-    private String qModel;
+    private Integer qModel;
 
     @ApiModelProperty("题目类型")
     @TableField("q_type")

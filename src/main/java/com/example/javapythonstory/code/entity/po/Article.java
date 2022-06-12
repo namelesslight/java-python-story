@@ -28,7 +28,7 @@ public class Article implements Serializable {
 
     @ApiModelProperty("文章编号")
     @TableId("a_id")
-    private String aId;
+    private Integer aId;
 
     @ApiModelProperty("文章名")
     @TableField("a_name")
@@ -36,7 +36,7 @@ public class Article implements Serializable {
 
     @ApiModelProperty("文章模块")
     @TableField("a_model")
-    private String aModel;
+    private Integer aModel;
 
     @ApiModelProperty("文章标题")
     @TableField("a_title")

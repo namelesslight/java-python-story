@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 @Data
 public class UserVo {
 
-    private String id;
+    private Integer id;
 
     private String email;
 
@@ -15,7 +15,9 @@ public class UserVo {
 
     private String header;
 
-    private String direction;
+    private String directionName;
+
+    private Integer directionId;
 
     private String role;
 

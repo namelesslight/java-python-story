@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class UpdateUserDirectionDto {
 
-    private String userId;
+    private Integer userId;
 
-    private String userDirection;
+    private Integer userDirection;
 
 }

@@ -75,9 +75,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         registerInfo.put("registerCode",registerCode);
         if (registerCode == 1){
-            String userId = UUIDUtil.getUUID();
             String secretPassword = SecretUtil.secretString(password);
-            userMapper.addUser(userId, name, email, secretPassword);
+            userMapper.addUser(name, email, secretPassword);
         }
         return registerInfo;
     }
@@ -90,9 +89,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         UserVo userInfo = userMapper.queryCountByEmailAndPassword(email, secretPassword);
         if (userInfo != null){
             Map<String, String> claims = new HashMap<>();
-            String id = userInfo.getId();
+            Integer id = userInfo.getId();
             String role = userInfo.getRole();
-            claims.put("id", id);
+            claims.put("id", String.valueOf(id));
             claims.put("role", role);
             String token = JWTUtil.createToken(claims);
             loginInfo.put("userInfo", userInfo);
@@ -133,9 +132,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             registerCode = 0;
         }
         if (registerCode == 1){
-            String userId = UUIDUtil.getUUID();
             String secretPassword = SecretUtil.secretString(password);
-            registerCode = userMapper.addAdmin(userId, name, secretPassword);
+            registerCode = userMapper.addAdmin(name, secretPassword);
         }
         registerInfo.put("registerCode",registerCode);
         return registerInfo;
@@ -149,9 +147,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         UserVo userInfo = userMapper.queryCountByNameAndPassword(name, secretPassword);
         if (userInfo != null){
             Map<String, String> claims = new HashMap<>();
-            String id = userInfo.getId();
+            Integer id = userInfo.getId();
             String role = userInfo.getRole();
-            claims.put("id", id);
+            claims.put("id", String.valueOf(id));
             claims.put("role", role);
             String token = JWTUtil.createToken(claims);
             loginInfo.put("userInfo", userInfo);
@@ -164,35 +162,35 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public Integer updateUserInfo(String userId, String name) {
+    public Integer updateUserInfo(Integer userId, String name) {
         Integer updateCode = userMapper.updateUserInfoById(userId, name);
         return updateCode;
     }
 
     @Override
-    public Integer updateUserDirection(String userId, String direction) {
+    public Integer updateUserDirection(Integer userId, Integer direction) {
         Integer updateCode = userMapper.updateUserDirectionById(userId, direction);
         return updateCode;
     }
 
     @Override
-    public Integer updateHeadPicture(String userId, MultipartFile headPicture) throws IOException {
-        String imagePath = "C:/Users/Lenovo/Desktop/image/" + userId;
+    public Integer updateHeadPicture(Integer userId, MultipartFile headPicture) throws IOException {
+//        String imagePath = "C:/Users/Lenovo/Desktop/image/" + userId;
         //服务器路径
-        //String imagePath = "/usr/local/src/spring/image/admin/" + delID;
+        String imagePath = "/usr/local/src/spring/file/image/" + userId;
         String headPicturePath = FileUtil.addImg(headPicture, imagePath);
         Integer updateCode = userMapper.updateUserHeaderById(userId, headPicturePath);
         return updateCode;
     }
 
     @Override
-    public Integer updateEmail(String userId, String email) {
+    public Integer updateEmail(Integer userId, String email) {
         Integer updateCode = userMapper.updateEmailById(userId, email);
         return updateCode;
     }
 
     @Override
-    public Map<String, Object> updatePassword(String userId, String oldPassword, String newPassword, String rwPassword) {
+    public Map<String, Object> updatePassword(Integer userId, String oldPassword, String newPassword, String rwPassword) {
         Map<String, Object> updateInfo = new HashMap<>();
         Integer updateCode = 1;
         String secretOldPassword = SecretUtil.secretString(oldPassword);
@@ -226,18 +224,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public Integer deleteUserById(String userId) {
+    public Integer deleteUserById(Integer userId) {
         return null;
     }
 
     @Override
-    public UserVo queryOneUser(String userId) {
+    public UserVo queryOneUser(Integer userId) {
         UserVo data = userMapper.queryOneUserById(userId);
         return data;
     }
 
     @Override
-    public List<UserVo> listUserByDirection(String directionId) {
+    public List<UserVo> listUserByDirection(Integer directionId) {
         List<UserVo> data = userMapper.listUsersByDirection(directionId);
         return data;
     }

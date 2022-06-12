@@ -28,7 +28,7 @@ public class Direction implements Serializable {
 
     @ApiModelProperty("方向编号")
     @TableId("d_id")
-    private String dId;
+    private Integer dId;
 
     @ApiModelProperty("方向名")
     @TableField("d_name")

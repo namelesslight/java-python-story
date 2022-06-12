@@ -11,4 +11,33 @@
         <result column="is_delete" property="isDelete" />
     </resultMap>
 
+    <insert id="addModel">
+        INSERT INTO `tb_model` VALUES(NULL, #{modelName}, #{directId}, NOW(), 0);
+    </insert>
+
+    <update id="updateModel">
+        UPDATE `tb_model`
+        SET `m_direction` = #{modelName}
+        WHERE `m_id` = #{modelId}
+    </update>
+
+    <update id="deleteModel">
+        UPDATE `tb_model`
+        SET `is_delete` = 1
+        WHERE `m_id` = #{modelId}
+    </update>
+
+    <select id="listModelByDirection" resultType="com.example.javapythonstory.code.entity.vo.model.ModelVo">
+        SELECT
+            `m`.`m_id` AS `modelId`,
+            `m`.`m_name` AS `modelName`,
+            `d`.`d_id` AS `directionId`,
+            `d`.`d_name` AS `directionName`
+        FROM `tb_model` AS `m`
+        LEFT JOIN `tb_direction` AS `d`
+        ON `m`.`m_direction` = `d`.`d_id`
+        WHERE `m`.`m_direction` = #{directionId}
+        AND `m`.`is_delete` = 0
+    </select>
+
 </mapper>

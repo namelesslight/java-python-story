@@ -41,10 +41,10 @@ public class FileUtil {
         fis.close();
         fos.close();
         //本地测试使用
-        return filePath;
+//        return filePath;
         //服务器上使用
-//        String id = path.replace("/usr/local/src/file/","");
-//        return "/file/image/" + id + "/" + imageName;
+        String id = path.replace("/usr/local/src/spring/file/image/","");
+        return "/file/image/" + id + "/" + imageName;
     }
 
     /**

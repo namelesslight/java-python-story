@@ -26,19 +26,18 @@ public class DirectionServiceImpl extends ServiceImpl<DirectionMapper, Direction
 
     @Override
     public Integer addDirection(String directionName) {
-        String directionId = UUIDUtil.getUUID();
-        Integer addCode = directionMapper.addDirection(directionId, directionName);
+        Integer addCode = directionMapper.addDirection(directionName);
         return addCode;
     }
 
     @Override
-    public Integer updateDirection(String directionId, String directionName) {
+    public Integer updateDirection(Integer directionId, String directionName) {
         Integer updateCode = directionMapper.updateDirection(directionId, directionName);
         return updateCode;
     }
 
     @Override
-    public Integer deleteDirection(String directionId) {
+    public Integer deleteDirection(Integer directionId) {
         Integer deleteCode = directionMapper.deleteDirection(directionId);
         return deleteCode;
     }
@@ -50,7 +49,7 @@ public class DirectionServiceImpl extends ServiceImpl<DirectionMapper, Direction
     }
 
     @Override
-    public Direction queryOneDirectionById(String directionId) {
+    public Direction queryOneDirectionById(Integer directionId) {
         Direction direction = directionMapper.queryOneDirectionById(directionId);
         return direction;
     }

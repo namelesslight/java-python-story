@@ -36,7 +36,7 @@ public class Model implements Serializable {
 
     @ApiModelProperty("用户所选模块方向")
     @TableField("m_direction")
-    private String mDirection;
+    private Integer mDirection;
 
     @ApiModelProperty("创建时间")
     @TableField("create_time")

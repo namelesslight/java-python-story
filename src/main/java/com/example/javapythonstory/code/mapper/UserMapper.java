@@ -18,31 +18,31 @@ import java.util.List;
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
 
-    Integer addUser(String userId, String username,String email,String password);
+    Integer addUser(String username,String email,String password);
 
     Integer queryCountByEmail(String email);
 
     UserVo queryCountByEmailAndPassword(String email, String password);
 
-    Integer addAdmin(String userId, String username, String password);
+    Integer addAdmin(String username, String password);
 
     Integer queryCountBySuperName(String username);
 
     UserVo queryCountByNameAndPassword(String username, String password);
 
-    Integer updateUserHeaderById(String id, String headPath);
+    Integer updateUserHeaderById(Integer id, String headPath);
 
-    Integer updateUserInfoById(String id, String username);
+    Integer updateUserInfoById(Integer id, String username);
 
-    Integer updateUserDirectionById(String id, String direction);
+    Integer updateUserDirectionById(Integer id, Integer direction);
 
-    Integer updateEmailById(String id,String email);
+    Integer updateEmailById(Integer id,String email);
 
-    Integer updatePasswordById(String id, String password);
+    Integer updatePasswordById(Integer id, String password);
 
-    Integer queryCountByIdAndPassword(String id, String password);
+    Integer queryCountByIdAndPassword(Integer id, String password);
 
-    UserVo queryOneUserById(String id);
+    UserVo queryOneUserById(Integer id);
 
-    List<UserVo> listUsersByDirection(String direction);
+    List<UserVo> listUsersByDirection(Integer direction);
 }
