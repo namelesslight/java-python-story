@@ -25,26 +25,31 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     @Override
     public Integer addArticle(Integer modelId, String articleName, String articleTitle, String articleContent) {
-        return null;
+        Integer addCode = articleMapper.addArticle(modelId, articleName, articleTitle, articleContent);
+        return addCode;
     }
 
     @Override
     public Integer updateArticle(Integer articleId, String articleTitle, String articleContent) {
-        return null;
+        Integer updateCode = articleMapper.updateArticle(articleId, articleTitle, articleContent);
+        return updateCode;
     }
 
     @Override
     public Integer deleteArticle(Integer articleId) {
-        return null;
+        Integer deleteCode = articleMapper.deleteArticle(articleId);
+        return deleteCode;
     }
 
     @Override
     public List<Article> listArticleByModel(Integer modelId) {
-        return null;
+        List<Article> data = articleMapper.listArticleByModel(modelId);
+        return data;
     }
 
     @Override
     public Article queryOneArticleById(Integer articleId) {
-        return null;
+        Article data = articleMapper.queryOneArticleById(articleId);
+        return data;
     }
 }

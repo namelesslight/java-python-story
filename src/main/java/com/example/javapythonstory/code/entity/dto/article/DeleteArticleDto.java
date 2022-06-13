@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class DeleteArticleDto {
 
-    private String articleId;
+    private Integer articleId;
 
 }

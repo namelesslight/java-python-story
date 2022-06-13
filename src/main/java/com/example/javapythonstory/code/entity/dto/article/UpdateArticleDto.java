@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class UpdateArticleDto {
 
-    private String articleId;
+    private Integer articleId;
 
     private String articleTitle;
 
