@@ -38,9 +38,9 @@ public class Resource implements Serializable {
     @TableField("r_type")
     private String rType;
 
-    @ApiModelProperty("资源对应文章主键")
-    @TableField("r_article")
-    private Integer rArticle;
+    @ApiModelProperty("添加资源的用户")
+    @TableField("r_user")
+    private Integer rUser;
 
     @ApiModelProperty("创建时间")
     @TableField("create_time")

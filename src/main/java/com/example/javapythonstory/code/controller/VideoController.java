@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +35,7 @@ public class VideoController {
                               @RequestParam String name,
                               @RequestParam String path,
                               @RequestParam MultipartFile picture,
-                              @RequestParam String introduce){
+                              @RequestParam String introduce) throws IOException {
         Map<String, Object> message = new HashMap<>();
         Integer addCode = videoService.addVideo(modelId, name, path, picture, introduce);
         message.put("addCode", addCode);

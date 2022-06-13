@@ -13,7 +13,7 @@
     </resultMap>
 
     <insert id="addResource">
-        INSERT INTO `tb_resource` VALUES(NULL, #{picture}, #{type}, #{articleId}, NOW(), 0);
+        INSERT INTO `tb_resource` VALUES(NULL, #{picture}, #{type}, #{articleId},#{userId}, NOW(), 0);
     </insert>
 
     <delete id="deleteResourceByPath">
@@ -25,4 +25,24 @@
         DELETE FROM `tb_resource`
         WHERE `r_id` = #{resourceId}
     </delete>
+
+    <select id="querypathById" resultType="java.lang.String">
+        SELECT `r_path`
+        FROM `tb_resource`
+        WHERE `r_id` = #{resourceId}
+    </select>
+
+    <select id="listResourceByUser" resultType="com.example.javapythonstory.code.entity.po.Resource">
+        SELECT
+               `r`.`r_id`,
+               `r`.`r_path`,
+               `r`.`r_type`,
+               `r`.`r_user`,
+               `r`.`create_time`,
+               `r`.`is_delete`
+        FROM `tb_resource` AS `r`
+        LEFT JOIN `tb_user` AS `u`
+        ON `r`.`r_user` = `u`.`u_id`
+        WHERE `r_id` = #{resourceId}
+    </select>
 </mapper>

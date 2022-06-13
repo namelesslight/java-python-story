@@ -17,7 +17,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 "/direction/common/**",
                 "/code/common/**",
                 "/model/common/**",
-                "/article/common/**"
+                "/article/common/**",
+                "/resource/common/**"
         };
 
         String[] superPathPatterns = {
