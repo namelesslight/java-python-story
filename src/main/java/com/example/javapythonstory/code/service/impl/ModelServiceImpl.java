@@ -5,6 +5,7 @@ import com.example.javapythonstory.code.entity.vo.model.ModelVo;
 import com.example.javapythonstory.code.mapper.ModelMapper;
 import com.example.javapythonstory.code.service.ModelService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,7 +22,7 @@ import java.util.List;
 @Service
 public class ModelServiceImpl extends ServiceImpl<ModelMapper, Model> implements ModelService {
 
-    @Resource
+    @Autowired
     private ModelMapper modelMapper;
 
     @Override

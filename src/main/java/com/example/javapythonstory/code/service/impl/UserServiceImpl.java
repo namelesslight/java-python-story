@@ -35,7 +35,7 @@ import java.util.regex.Pattern;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
-    @Resource
+    @Autowired
     private UserMapper userMapper;
 
     @Value("${spring.mail.username}")
@@ -219,7 +219,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public Integer updateHeadPicture(Integer userId, MultipartFile headPicture) throws IOException {
 //        String imagePath = "C:/Users/Lenovo/Desktop/image/" + userId;
         //服务器路径
-        String imagePath = "/usr/local/src/spring/file/image/" + userId;
+        String imagePath = "/usr/local/src/spring/file/image/user_header/" + userId;
         String headPicturePath = FileUtil.addImg(headPicture, imagePath);
         Integer updateCode = userMapper.updateUserHeaderById(userId, headPicturePath);
         return updateCode;

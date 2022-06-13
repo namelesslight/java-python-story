@@ -7,6 +7,7 @@ import com.example.javapythonstory.code.entity.dto.direction.UpdateDirectionDto;
 import com.example.javapythonstory.code.entity.po.Direction;
 import com.example.javapythonstory.code.result.WebResult;
 import com.example.javapythonstory.code.service.DirectionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -26,7 +27,7 @@ import java.util.Map;
 @RequestMapping("/direction")
 public class DirectionController {
 
-    @Resource
+    @Autowired
     private DirectionService directionService;
 
     @PostMapping("/super/addDirection")

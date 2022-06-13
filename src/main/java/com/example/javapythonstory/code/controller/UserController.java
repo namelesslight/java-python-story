@@ -38,12 +38,6 @@ import java.util.concurrent.TimeUnit;
 public class UserController {
 
     @Autowired
-    private JavaMailSender jms;
-
-    @Value("${spring.mail.username}")
-    private String from;
-
-    @Resource
     private UserService userService;
 
     @PostMapping("/base/userRegister")

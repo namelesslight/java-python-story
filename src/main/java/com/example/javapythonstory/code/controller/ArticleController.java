@@ -6,6 +6,7 @@ import com.example.javapythonstory.code.entity.dto.article.UpdateArticleDto;
 import com.example.javapythonstory.code.entity.po.Article;
 import com.example.javapythonstory.code.result.WebResult;
 import com.example.javapythonstory.code.service.ArticleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -25,7 +26,7 @@ import java.util.Map;
 @RequestMapping("/article")
 public class ArticleController {
 
-    @Resource
+    @Autowired
     private ArticleService articleService;
 
     @PostMapping("/super/addArticle")

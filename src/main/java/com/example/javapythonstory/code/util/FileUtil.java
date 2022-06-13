@@ -20,12 +20,12 @@ public class FileUtil {
      * @return 返回路径，用于前端删除图片
      * @throws IOException 抛出io流异常
      */
-    public static String addImg(MultipartFile imgFile,String path) throws IOException {
+    public static String addImg(MultipartFile imgFile, String path) throws IOException {
         File imgFolder=new File(path);
         if (!imgFolder.exists()) {
             imgFolder.mkdir();
         }
-        InputStream fis= null;
+        InputStream fis = null;
         String filePath = null;
         fis = imgFile.getInputStream();
         String imageName = imgFile.getName() + ".jpg";

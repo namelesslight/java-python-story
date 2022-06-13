@@ -12,4 +12,17 @@
         <result column="is_delete" property="isDelete" />
     </resultMap>
 
+    <insert id="addResource">
+        INSERT INTO `tb_resource` VALUES(NULL, #{picture}, #{type}, #{articleId}, NOW(), 0);
+    </insert>
+
+    <delete id="deleteResourceByPath">
+        DELETE FROM `tb_resource`
+        WHERE `r_path` = #{resourcePath}
+    </delete>
+
+    <delete id="deleteResourceById">
+        DELETE FROM `tb_resource`
+        WHERE `r_id` = #{resourceId}
+    </delete>
 </mapper>

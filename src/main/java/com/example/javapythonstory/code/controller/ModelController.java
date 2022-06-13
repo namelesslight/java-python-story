@@ -7,6 +7,7 @@ import com.example.javapythonstory.code.entity.dto.model.UpdateModelDto;
 import com.example.javapythonstory.code.entity.vo.model.ModelVo;
 import com.example.javapythonstory.code.result.WebResult;
 import com.example.javapythonstory.code.service.ModelService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -26,7 +27,7 @@ import java.util.Map;
 @RequestMapping("/model")
 public class ModelController {
 
-    @Resource
+    @Autowired
     private ModelService modelService;
 
     @PostMapping("/super/addModel")
