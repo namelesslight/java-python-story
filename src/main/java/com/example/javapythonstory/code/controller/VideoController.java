@@ -1,9 +1,11 @@
 package com.example.javapythonstory.code.controller;
 
-
+import com.example.javapythonstory.code.entity.dto.video.AddVideoDto;
+import com.example.javapythonstory.code.entity.dto.video.CommitDto;
 import com.example.javapythonstory.code.entity.dto.video.DeleteVideoDto;
 import com.example.javapythonstory.code.entity.dto.video.UpdateVideoDto;
 import com.example.javapythonstory.code.entity.po.Video;
+import com.example.javapythonstory.code.entity.vo.video.UpdateVideoPictureInfo;
 import com.example.javapythonstory.code.result.WebResult;
 import com.example.javapythonstory.code.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,15 +33,27 @@ public class VideoController {
     private VideoService videoService;
 
     @PostMapping("/super/addVideo")
-    public WebResult addVideo(@RequestParam Integer modelId,
-                              @RequestParam String name,
-                              @RequestParam String path,
-                              @RequestParam MultipartFile picture,
-                              @RequestParam String introduce) throws IOException {
+    public WebResult addVideo(@RequestBody AddVideoDto addVideoDto){
         Map<String, Object> message = new HashMap<>();
-        Integer addCode = videoService.addVideo(modelId, name, path, picture, introduce);
+        Integer addCode = videoService.addVideo(addVideoDto.getModelId());
         message.put("addCode", addCode);
         return new WebResult().result200(message, "/super/addVideo");
+    }
+
+    @PostMapping("/super/cancelCommit")
+    public WebResult cancelCommit(@RequestBody CommitDto commitDto){
+        Map<String, Object> message = new HashMap<>();
+        Integer cancelCode = videoService.cancelCommit(commitDto.getVideoId());
+        message.put("cancelCode", cancelCode);
+        return new WebResult().result200(message, "/super/cancelCommit");
+    }
+
+    @PostMapping("/super/commitVideo")
+    public WebResult commitVideo(@RequestBody CommitDto commitDto){
+        Map<String, Object> message = new HashMap<>();
+        Integer commitCode = videoService.commitVideo(commitDto.getVideoId());
+        message.put("commitCode", commitCode);
+        return new WebResult().result200(message, "/super/commitVideo");
     }
 
     @PostMapping("/super/updateVideo")
@@ -56,9 +70,9 @@ public class VideoController {
 
     @PostMapping("/super/updateVideoPicture")
     public WebResult updateVideoPicture(@RequestParam Integer videoId,
-                                        @RequestParam MultipartFile picture){
+                                        @RequestParam MultipartFile picture) throws IOException {
         Map<String, Object> message = new HashMap<>();
-        Integer updateCode = videoService.updateVideoPicture(videoId, picture);
+        UpdateVideoPictureInfo updateCode = videoService.updateVideoPicture(videoId, picture);
         message.put("updateCode", updateCode);
         return new WebResult().result200(message, "/super/updateVideoPicture");
     }
@@ -77,6 +91,14 @@ public class VideoController {
         List<Video> data = videoService.listVideoByModel(modelId);
         message.put("data", data);
         return new WebResult().result200(message, "/common/listVideoByModel");
+    }
+
+    @GetMapping("/super/listUnCommitVideo")
+    public WebResult listUnCommitVideo(@RequestParam Integer modelId){
+        Map<String, Object> message = new HashMap<>();
+        List<Video> data = videoService.listUnCommitVideo(modelId);
+        message.put("data", data);
+        return new WebResult().result200(message, "/super/listUnCommitVideo");
     }
 
     @GetMapping("/common/queryOneVideoById")

@@ -1,6 +1,7 @@
 package com.example.javapythonstory.code.service.impl;
 
 import com.example.javapythonstory.code.entity.po.Video;
+import com.example.javapythonstory.code.entity.vo.video.UpdateVideoPictureInfo;
 import com.example.javapythonstory.code.mapper.VideoMapper;
 import com.example.javapythonstory.code.service.VideoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -28,37 +30,67 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     private VideoMapper videoMapper;
 
     @Override
-    public Integer addVideo(Integer modelId, String name, String path, MultipartFile picture, String introduce) throws IOException {
-        String imagePath = "/usr/local/src/spring/file/image/video/" + getRandomCode();
-        FileUtil.addImg(picture, imagePath);
-        Integer addCode = videoMapper.addVideo(modelId, name, path, imagePath, introduce);
+    public Integer addVideo(Integer modelId) {
+        Integer addCode = videoMapper.addVideo(modelId);
         return addCode;
+    }
+
+    @Override
+    public Integer cancelCommit(Integer videoId) {
+        Integer deleteCode = videoMapper.deleteUnCommitVideo(videoId);
+        return deleteCode;
+    }
+
+    @Override
+    public Integer commitVideo(Integer videoId) {
+        Video video = videoMapper.queryOneVideoById(videoId);
+        Boolean nameJudge = "".equals(video.getVName());
+        Boolean introduceJudge = "".equals(video.getVIntroduce());
+        Boolean pathJudge = "".equals(video.getVPath());
+        if (nameJudge && introduceJudge && pathJudge){
+            return 0;
+        }
+        Integer commitCode = videoMapper.setVideoCommit(videoId);
+        return commitCode;
     }
 
     @Override
     public Integer updateVideo(Integer videoId, String name, String path, String introduce) {
         Integer updateCode = videoMapper.updateVideo(videoId, name, path, introduce);
-        return  updateCode;
+        return updateCode;
     }
 
     @Override
-    public Integer updateVideoPicture(Integer videoId, MultipartFile picture) {
-        return null;
+    public UpdateVideoPictureInfo updateVideoPicture(Integer videoId, MultipartFile picture) throws IOException {
+        String path = "/usr/local/src/spring/file/image/video_header/" + videoId;
+        String imagePath = FileUtil.addImg(picture, path);
+        Integer updateCode = videoMapper.updateVideoPicture(videoId, imagePath);
+        UpdateVideoPictureInfo updateVideoPictureInfo = new UpdateVideoPictureInfo(updateCode, imagePath);
+        return updateVideoPictureInfo;
     }
 
     @Override
     public Integer deleteVideo(Integer videoId) {
-        return null;
+        Integer deleteCode = videoMapper.deleteVideo(videoId);
+        return deleteCode;
     }
 
     @Override
     public List<Video> listVideoByModel(Integer modelId) {
-        return null;
+        List<Video> data = videoMapper.listVideoByModel(modelId);
+        return data;
+    }
+
+    @Override
+    public List<Video> listUnCommitVideo(Integer modelId) {
+        List<Video> data = videoMapper.listUnCommitVideo(modelId);
+        return data;
     }
 
     @Override
     public Video queryOneVideoById(Integer videoId) {
-        return null;
+        Video data = videoMapper.queryOneVideoById(videoId);
+        return data;
     }
 
     private static String getRandomCode(){

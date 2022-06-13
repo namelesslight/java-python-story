@@ -14,4 +14,93 @@
         <result column="is_delete" property="isDelete" />
     </resultMap>
 
+    <insert id="addVideo">
+        INSERT INTO `tb_video` VALUES (NULL, '', '', #{modelId}, '', '',NOW(), 0, 0);
+    </insert>
+
+    <delete id="deleteUnCommitVideo">
+        DELETE
+        FROM `tb_video`
+        WHERE `v_id` = #{videoId}
+        AND `is_commit` = 0
+    </delete>
+
+    <update id="setVideoCommit">
+        UPDATE `tb_video`
+        SET `is_commit` = 1
+        WHERE `v_id` = #{videoId}
+    </update>
+
+    <update id="updateVideo">
+        UPDATE `tb_video`
+        SET
+            `v_name` = #{name},
+            `v_path` = #{path},
+            `v_introduce` = #{introduce}
+        WHERE `v_id` = #{videoId}
+    </update>
+
+    <update id="updateVideoPicture">
+        UPDATE `tb_video`
+        SET
+            `v_picture` = #{picture}
+        WHERE `v_id` = #{videoId}
+    </update>
+
+    <update id="deleteVideo">
+        UPDATE `tb_video`
+        SET
+            `is_delete` = 1
+        WHERE `v_id` = #{videoId}
+    </update>
+
+    <select id="listVideoByModel" resultType="com.example.javapythonstory.code.entity.po.Video">
+        SELECT
+            `v_id`,
+            `v_name`,
+            `v_model`,
+            `v_picture`,
+            `v_path`,
+            `v_introduce`,
+            `create_time`,
+            `is_delete`,
+            `is_commit`
+        FROM `tb_video`
+        WHERE `v_model` = #{modelId}
+        AND `is_delete` = 0
+        AND `is_commit` = 1
+    </select>
+
+    <select id="listUnCommitVideo" resultType="com.example.javapythonstory.code.entity.po.Video">
+        SELECT
+            `v_id`,
+            `v_name`,
+            `v_model`,
+            `v_picture`,
+            `v_path`,
+            `v_introduce`,
+            `create_time`,
+            `is_delete`,
+            `is_commit`
+        FROM `tb_video`
+        WHERE `v_model` = #{modelId}
+          AND `is_delete` = 0
+          AND `is_commit` = 0
+    </select>
+
+    <select id="queryOneVideoById" resultType="com.example.javapythonstory.code.entity.po.Video">
+        SELECT
+            `v_id`,
+            `v_name`,
+            `v_model`,
+            `v_picture`,
+            `v_path`,
+            `v_introduce`,
+            `create_time`,
+            `is_delete`,
+            `is_commit`
+        FROM `tb_video`
+        WHERE `v_id` = #{videoId}
+          AND `is_delete` = 0
+    </select>
 </mapper>

@@ -19,14 +19,16 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 "/model/common/**",
                 "/article/common/**",
                 "/resource/common/**",
-                "/note/common/**"
+                "/note/common/**",
+                "/video/common/**"
         };
 
         String[] superPathPatterns = {
                 "/user/super/**",
                 "/direction/super/**",
                 "/model/super/**",
-                "/article/super/**"
+                "/article/super/**",
+                "/video/super/**"
         };
         //配置不需要拦截的路径
         String[] excludePathPatterns = {

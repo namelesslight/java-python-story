@@ -58,5 +58,8 @@ public class Video implements Serializable {
     @TableField("is_delete")
     private Boolean isDelete;
 
+    @ApiModelProperty("是否提交")
+    @TableField("is_commit")
+    private Boolean isCommit;
 
 }

@@ -17,15 +17,21 @@ import java.util.List;
 @Mapper
 public interface VideoMapper extends BaseMapper<Video> {
 
-    Integer addVideo(Integer modelId, String name, String path, String picture, String introduce);
+    Integer addVideo(Integer modelId);
+
+    Integer deleteUnCommitVideo(Integer videoId);
+
+    Integer setVideoCommit(Integer videoId);
 
     Integer updateVideo(Integer videoId, String name, String path, String introduce);
 
-    Integer updateVideoPicture(Integer videoId,String picture);
+    Integer updateVideoPicture(Integer videoId, String picture);
 
     Integer deleteVideo(Integer videoId);
 
     List<Video> listVideoByModel(Integer modelId);
+
+    List<Video> listUnCommitVideo(Integer modelId);
 
     Video queryOneVideoById(Integer videoId);
 
