@@ -13,7 +13,7 @@
     </resultMap>
 
     <insert id="addResource">
-        INSERT INTO `tb_resource` VALUES(NULL, #{picture}, #{type}, #{articleId},#{userId}, NOW(), 0);
+        INSERT INTO `tb_resource` VALUES(NULL, #{picture}, #{type}, #{userId}, NOW(), 0);
     </insert>
 
     <delete id="deleteResourceByPath">

@@ -54,7 +54,7 @@ public class ResourceController {
         return new WebResult().result200(message, "/common/deleteResourceById");
     }
 
-    @PostMapping("/common/listResourceByUser")
+    @GetMapping("/common/listResourceByUser")
     public WebResult listResourceByUser(@RequestParam Integer userId){
         Map<String, Object> message = new HashMap<>();
         List<Resource> deleteCode = resourceService.listResourceByUser(userId);

@@ -29,7 +29,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
     @Override
     public Integer addVideo(Integer modelId, String name, String path, MultipartFile picture, String introduce) throws IOException {
-        String imagePath = "/usr/local/src/spring/file/image/video/" + getRandomCode() + "/";
+        String imagePath = "/usr/local/src/spring/file/image/video/" + getRandomCode();
         FileUtil.addImg(picture, imagePath);
         Integer addCode = videoMapper.addVideo(modelId, name, path, imagePath, introduce);
         return addCode;

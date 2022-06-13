@@ -13,4 +13,65 @@
         <result column="is_delete" property="isDelete" />
     </resultMap>
 
+    <insert id="addNote">
+        INSERT INTO `tb_note` VALUES (NULL, #{userId}, #{modelId}, #{title}, #{content}, NOW(), 0);
+    </insert>
+
+    <update id="updateNote">
+        UPDATE `tb_note`
+        SET
+            `n_title` = #{title},
+            `n_content` = #{content}
+        WHERE `n_id` = #{noteId}
+        AND `n_user` = #{userId}
+    </update>
+
+    <update id="deleteNote">
+        UPDATE `tb_note`
+        SET `is_delete` = 1
+        WHERE `n_id` = #{noteId}
+    </update>
+
+    <select id="listNoteByUser" resultType="com.example.javapythonstory.code.entity.po.Note">
+        SELECT
+            `n_id`,
+            `n_user`,
+            `n_model`,
+            `n_title`,
+            `n_content`,
+            `create_time`,
+            `is_delete`
+        FROM `tb_note`
+        WHERE `n_user` = #{userId}
+        AND `is_delete` = 0
+    </select>
+
+    <select id="listNoteByUserAndModel" resultType="com.example.javapythonstory.code.entity.po.Note">
+        SELECT
+            `n_id`,
+            `n_user`,
+            `n_model`,
+            `n_title`,
+            `n_content`,
+            `create_time`,
+            `is_delete`
+        FROM `tb_note`
+        WHERE `n_user` = #{userId}
+          AND `n_model` = #{modelId}
+          AND `is_delete` = 0
+    </select>
+
+    <select id="queryOneNoteById" resultType="com.example.javapythonstory.code.entity.po.Note">
+        SELECT
+            `n_id`,
+            `n_user`,
+            `n_model`,
+            `n_title`,
+            `n_content`,
+            `create_time`,
+            `is_delete`
+        FROM `tb_note`
+        WHERE `n_id` = #{noteId}
+          AND `is_delete` = 0
+    </select>
 </mapper>
