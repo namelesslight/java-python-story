@@ -19,7 +19,7 @@ import java.util.Map;
  *  前端控制器
  * </p>
  *
- * @author 
+ * @author ZCL
  * @since 2022-06-08
  */
 @RestController
@@ -29,6 +29,13 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
+    /**
+     * <p>
+     *     添加文章
+     * </p>
+     * @param addArticleDto 添加文章DTO
+     * @return
+     */
     @PostMapping("/super/addArticle")
     public WebResult addArticle(@RequestBody AddArticleDto addArticleDto){
         Map<String, Object> message = new HashMap<>();
@@ -41,6 +48,13 @@ public class ArticleController {
         return new WebResult().result200(message, "/super/addArticle");
     }
 
+    /**
+     * <p>
+     *     修改文章
+     * </p>
+     * @param updateArticleDto 修改文章DTO
+     * @return
+     */
     @PostMapping("/super/updateArticle")
     public WebResult updateArticle(@RequestBody UpdateArticleDto updateArticleDto){
         Map<String, Object> message = new HashMap<>();
@@ -52,6 +66,13 @@ public class ArticleController {
         return new WebResult().result200(message, "/super/updateArticle");
     }
 
+    /**
+     * <p>
+     *     删除文章
+     * </p>
+     * @param deleteArticleDto 删除文章DTO
+     * @return
+     */
     @PostMapping("/super/deleteArticle")
     public WebResult deleteArticle(@RequestBody DeleteArticleDto deleteArticleDto){
         Map<String, Object> message = new HashMap<>();
@@ -60,6 +81,13 @@ public class ArticleController {
         return new WebResult().result200(message, "/super/deleteArticle");
     }
 
+    /**
+     * <p>
+     *     通过模块获取文章
+     * </p>
+     * @param modelId 模块编号
+     * @return
+     */
     @GetMapping("/common/listArticleByModel")
     public WebResult listArticleByModel(@RequestParam Integer modelId){
         Map<String, Object> message = new HashMap<>();
@@ -68,6 +96,13 @@ public class ArticleController {
         return new WebResult().result200(message, "/common/listArticleByModel");
     }
 
+    /**
+     * <p>
+     *     通过编号获取文章
+     * </p>
+     * @param articleId 文章编号
+     * @return
+     */
     @GetMapping("/common/queryOneArticleById")
         public WebResult queryOneArticleById(@RequestParam Integer articleId){
         Map<String, Object> message = new HashMap<>();

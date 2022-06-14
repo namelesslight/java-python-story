@@ -18,7 +18,7 @@ import java.util.Map;
  *  前端控制器
  * </p>
  *
- * @author 
+ * @author ZCL
  * @since 2022-06-08
  */
 @RestController
@@ -27,6 +27,13 @@ public class NoteController {
     @Autowired
     private NoteService noteService;
 
+    /**
+     * <p>
+     *     添加笔记
+     * </p>
+     * @param addNoteDto 添加笔记DTO
+     * @return
+     */
     @PostMapping("/common/addNote")
     public WebResult addNote(@RequestBody AddNoteDto addNoteDto){
         Map<String, Object> message = new HashMap<>();
@@ -39,6 +46,13 @@ public class NoteController {
         return new WebResult().result200(message, "/super/addArticle");
     }
 
+    /**
+     * <p>
+     *     修改笔记
+     * </p>
+     * @param updateNoteDto 修改笔记DTO
+     * @return
+     */
     @PostMapping("/common/updateNote")
     public WebResult updateNote(@RequestBody UpdateNoteDto updateNoteDto){
         Map<String, Object> message = new HashMap<>();
@@ -51,6 +65,13 @@ public class NoteController {
         return new WebResult().result200(message, "/super/updateArticle");
     }
 
+    /**
+     * <p>
+     *     删除笔记
+     * </p>
+     * @param deleteNoteDto 删除笔记DTO
+     * @return
+     */
     @PostMapping("/common/deleteNote")
     public WebResult deleteNote(@RequestBody DeleteNoteDto deleteNoteDto){
         Map<String, Object> message = new HashMap<>();
@@ -59,6 +80,13 @@ public class NoteController {
         return new WebResult().result200(message, "/super/deleteArticle");
     }
 
+    /**
+     * <p>
+     *     根据用户编号获取笔记
+     * </p>
+     * @param userId 用户编号
+     * @return
+     */
     @GetMapping("/common/listNoteByUser")
     public WebResult listNoteByUser(@RequestParam Integer userId){
         Map<String, Object> message = new HashMap<>();
@@ -67,6 +95,14 @@ public class NoteController {
         return new WebResult().result200(message, "/common/listArticleByModel");
     }
 
+    /**
+     * <p>
+     *     根据用户编号和模块编号获取笔记
+     * </p>
+     * @param userId 用户编号
+     * @param modelId 模块编号
+     * @return
+     */
     @GetMapping("/common/listNoteByUserAndModel")
     public WebResult listNoteByUserAndModel(@RequestParam Integer userId,
                                             @RequestParam Integer modelId){
@@ -76,6 +112,13 @@ public class NoteController {
         return new WebResult().result200(message, "/common/queryOneArticleById");
     }
 
+    /**
+     * <p>
+     *     根据笔记编号获取笔记
+     * </p>
+     * @param noteId 笔记编号
+     * @return
+     */
     @GetMapping("/common/queryOneNoteById")
     public WebResult queryOneNoteById(@RequestParam Integer noteId){
         Map<String, Object> message = new HashMap<>();

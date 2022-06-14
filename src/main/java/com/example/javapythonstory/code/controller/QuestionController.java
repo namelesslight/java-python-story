@@ -20,7 +20,7 @@ import java.util.Map;
  *  前端控制器
  * </p>
  *
- * @author 
+ * @author ZCL
  * @since 2022-06-08
  */
 @RestController
@@ -30,6 +30,13 @@ public class QuestionController {
     @Autowired
     private QuestionService questionService;
 
+    /**
+     * <p>
+     *     添加练习题
+     * </p>
+     * @param addQuestionDto 添加练习题DTO
+     * @return
+     */
     @PostMapping("/super/addTrainingQuestion")
     public WebResult addTrainingQuestion(@RequestBody AddTrainingQuestionDto addQuestionDto){
         Map<String, Object> message = new HashMap<>();
@@ -41,6 +48,13 @@ public class QuestionController {
         return new WebResult().result200(message, "/super/addQuestion");
     }
 
+    /**
+     * <p>
+     *     添加问卷内容
+     * </p>
+     * @param addAskQuestionDto 添加问卷内容DTO
+     * @return
+     */
     @PostMapping("/super/addAskQuestion")
     public WebResult addAskQuestion(@RequestBody AddAskQuestionDto addAskQuestionDto){
         Map<String, Object> message = new HashMap<>();
@@ -49,6 +63,13 @@ public class QuestionController {
         return new WebResult().result200(message, "/super/addQuestion");
     }
 
+    /**
+     * <p>
+     *     修改问题
+     * </p>
+     * @param updateQuestionDto 修改问题DTO
+     * @return
+     */
     @PostMapping("/super/updateQuestion")
     public WebResult updateQuestion(@RequestBody UpdateQuestionDto updateQuestionDto){
         Map<String, Object> message = new HashMap<>();
@@ -60,7 +81,14 @@ public class QuestionController {
         return new WebResult().result200(message, "/super/updateQuestion");
     }
 
-        @PostMapping("/super/deleteQuestion")
+    /**
+     * <p>
+     *     删除问题
+     * </p>
+     * @param deleteQuestionDto 删除问题DTO
+     * @return
+     */
+    @PostMapping("/super/deleteQuestion")
     public WebResult deleteQuestion(@RequestBody DeleteQuestionDto deleteQuestionDto){
         Map<String, Object> message = new HashMap<>();
         Integer deleteCode = questionService.deleteQuestion(deleteQuestionDto.getQuestionId());
@@ -68,6 +96,13 @@ public class QuestionController {
         return new WebResult().result200(message, "/super/deleteQuestion");
     }
 
+    /**
+     * <p>
+     *     通过模块获取对应练习题
+     * </p>
+     * @param modelId 通过模块获取对应练习题DTO
+     * @return
+     */
     @GetMapping("/common/listQuestionByModel")
     public WebResult listQuestionByModel(@RequestParam Integer modelId){
         Map<String, Object> message = new HashMap<>();
@@ -76,6 +111,12 @@ public class QuestionController {
         return new WebResult().result200(message, "/common/listQuestionByModel");
     }
 
+    /**
+     * <p>
+     *     获取问卷问题
+     * </p>
+     * @return
+     */
     @GetMapping("/common/listQuestionByAsk")
     public WebResult listQuestionByAsk(){
         Map<String, Object> message = new HashMap<>();
@@ -84,6 +125,13 @@ public class QuestionController {
         return new WebResult().result200(message, "/common/listQuestionByModel");
     }
 
+    /**
+     * <p>
+     *     通过问题编号获取问卷问题
+     * </p>
+     * @param questionId 问题编号
+     * @return
+     */
     @GetMapping("/common/queryOneQuestionById")
     public WebResult queryOneQuestionById(@RequestParam Integer questionId){
         Map<String, Object> message = new HashMap<>();

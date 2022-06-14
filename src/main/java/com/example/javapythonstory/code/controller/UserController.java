@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit;
  *  前端控制器
  * </p>
  *
- * @author 
+ * @author ZCL
  * @since 2022-06-08
  */
 @RestController
@@ -40,6 +40,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * <p>
+     *     用户注册
+     * </p>
+     * @param userRegisterDto 用户注册DTO
+     * @return
+     */
     @PostMapping("/base/userRegister")
     public WebResult userRegister(@RequestBody UserRegisterDto userRegisterDto){
         Map<String, Object> message = new HashMap<>();
@@ -53,6 +60,13 @@ public class UserController {
         return new WebResult().result200(message, "/base/userRegister");
     }
 
+    /**
+     * <p>
+     *     发送邮箱验证码
+     * </p>
+     * @param sendMessageDto 发送DTO
+     * @return
+     */
     @PostMapping("/base/sendMessage")
     public WebResult sendMessage(@RequestBody SendMessageDto sendMessageDto) {
         String email = sendMessageDto.getEmail();
@@ -60,6 +74,13 @@ public class UserController {
         return new WebResult().result200(message,"/base/sendMessage");
     }
 
+    /**
+     * <p>
+     *     用户登录
+     * </p>
+     * @param userLoginDto 用户登录DTO
+     * @return
+     */
     @PostMapping("/base/userLogin")
     public WebResult userLogin(@RequestBody UserLoginDto userLoginDto){
         Map<String, Object> message = new HashMap<>();
@@ -70,6 +91,13 @@ public class UserController {
         return new WebResult().result200(message, "/base/userLogin");
     }
 
+    /**
+     * <p>
+     *     管理员注册
+     * </p>
+     * @param adminRegisterDto 管理员注册DTO
+     * @return
+     */
     @PostMapping("/base/adminRegister")
     public WebResult adminRegister(@RequestBody AdminRegisterDto adminRegisterDto){
         Map<String, Object> message = new HashMap<>();
@@ -81,6 +109,13 @@ public class UserController {
         return new WebResult().result200(message ,"/base/adminRegister");
     }
 
+    /**
+     * <p>
+     *     管理员登录
+     * </p>
+     * @param adminLoginDto 管理员登录DTO
+     * @return
+     */
     @PostMapping("/base/adminLogin")
     public WebResult adminLogin(@RequestBody AdminLoginDto adminLoginDto){
         Map<String, Object> message = new HashMap<>();
@@ -91,6 +126,13 @@ public class UserController {
         return new WebResult().result200(message, "/base/adminLogin");
     }
 
+    /**
+     * <p>
+     *     修改用户名
+     * </p>
+     * @param updateUserInfoDto 修改用户名DTO
+     * @return
+     */
     @PostMapping("/common/updateUserInfo")
     public WebResult updateUserInfo(@RequestBody UpdateUserInfoDto updateUserInfoDto){
         Map<String, Object> message = new HashMap<>();
@@ -101,6 +143,13 @@ public class UserController {
         return new WebResult().result200(message, "/common/updateUserInfo");
     }
 
+    /**
+     * <p>
+     *     修改学习方向
+     * </p>
+     * @param updateUserDirectionDto 修改学习方向DTO
+     * @return
+     */
     @PostMapping("/common/updateUserDirection")
     public WebResult updateUserDirection(@RequestBody UpdateUserDirectionDto updateUserDirectionDto){
         Map<String, Object> message = new HashMap<>();
@@ -111,6 +160,15 @@ public class UserController {
         return new WebResult().result200(message, "/common/updateUserDirection");
     }
 
+    /**
+     * <p>
+     *     用户修改头像
+     * </p>
+     * @param id 用户编号
+     * @param headPicture 用户头像
+     * @return
+     * @throws IOException
+     */
     @PostMapping("/common/updateHeadPicture")
     public WebResult updateHeadPicture(@RequestParam Integer id,
                                        @RequestParam MultipartFile headPicture) throws IOException {
@@ -120,6 +178,13 @@ public class UserController {
         return new WebResult().result200(message, "/common/updateHeadPicture");
     }
 
+    /**
+     * <p>
+     *     用户修改邮箱
+     * </p>
+     * @param updateUserEmailDto 修改邮箱DTO
+     * @return
+     */
     @PostMapping("/common/updateEmail")
     public WebResult updateEmail(@RequestBody UpdateUserEmailDto updateUserEmailDto){
         Map<String, Object> message = new HashMap<>();
@@ -130,6 +195,13 @@ public class UserController {
         return new WebResult().result200(message, "/common/updateEmail");
     }
 
+    /**
+     * <p>
+     *     用户修改密码
+     * </p>
+     * @param updatePasswordDto 修改密码DTO
+     * @return
+     */
     @PostMapping("/common/updatePassword")
     public WebResult updatePassword(@RequestBody UpdatePasswordDto updatePasswordDto){
         Map<String, Object> message = new HashMap<>();
@@ -142,6 +214,13 @@ public class UserController {
         return new WebResult().result200(message, "/common/updatePassword");
     }
 
+    /**
+     * <p>
+     *     获取单个用户学习
+     * </p>
+     * @param userId 用户编号
+     * @return
+     */
     @GetMapping("/common/queryOneUser")
     public WebResult queryOneUser(@RequestParam Integer userId){
         Map<String, Object> message = new HashMap<>();
@@ -150,6 +229,13 @@ public class UserController {
         return new WebResult().result200(message, "/common/queryOneUser");
     }
 
+    /**
+     * <p>
+     *     根据学习路线查询用户学习
+     * </p>
+     * @param directionId 学习路线编号
+     * @return
+     */
     @GetMapping("/super/listUserByDirection")
     public WebResult listUserByDirection(@RequestParam Integer directionId){
         Map<String, Object> message = new HashMap<>();

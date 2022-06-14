@@ -15,7 +15,7 @@ import java.util.List;
  *  服务实现类
  * </p>
  *
- * @author 
+ * @author ZCL
  * @since 2022-06-08
  */
 @Service
@@ -24,30 +24,70 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     @Autowired
     private ArticleMapper articleMapper;
 
+    /**
+     * <p>
+     *     修改文章
+     * </p>
+     * @param modelId 模块编号
+     * @param articleName 文章名
+     * @param articleTitle 文章标题
+     * @param articleContent 文章内容
+     * @return
+     */
     @Override
     public Integer addArticle(Integer modelId, String articleName, String articleTitle, String articleContent) {
         Integer addCode = articleMapper.addArticle(modelId, articleName, articleTitle, articleContent);
         return addCode;
     }
 
+    /**
+     * <p>
+     *     修改文章
+     * </p>
+     * @param articleId 文章编号
+     * @param articleTitle 文章标题
+     * @param articleContent 文章内容
+     * @return
+     */
     @Override
     public Integer updateArticle(Integer articleId, String articleTitle, String articleContent) {
         Integer updateCode = articleMapper.updateArticle(articleId, articleTitle, articleContent);
         return updateCode;
     }
 
+    /**
+     * <p>
+     *     删除文章
+     * </p>
+     * @param articleId 文章编号
+     * @return
+     */
     @Override
     public Integer deleteArticle(Integer articleId) {
         Integer deleteCode = articleMapper.deleteArticle(articleId);
         return deleteCode;
     }
 
+    /**
+     * <p>
+     *     通过模块获取文章
+     * </p>
+     * @param modelId 模块编号
+     * @return
+     */
     @Override
     public List<Article> listArticleByModel(Integer modelId) {
         List<Article> data = articleMapper.listArticleByModel(modelId);
         return data;
     }
 
+    /**
+     * <p>
+     *     通过编号获取文章
+     * </p>
+     * @param articleId 文章编号
+     * @return
+     */
     @Override
     public Article queryOneArticleById(Integer articleId) {
         Article data = articleMapper.queryOneArticleById(articleId);

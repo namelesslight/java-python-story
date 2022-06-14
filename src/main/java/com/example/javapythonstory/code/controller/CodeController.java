@@ -15,6 +15,13 @@ import java.util.Map;
 @RequestMapping("/code")
 public class CodeController {
 
+    /**
+     * <p>
+     *     运行代码
+     * </p>
+     * @param pythonCodeDto 运行DTO
+     * @return
+     */
     @PostMapping("/common/run")
     public WebResult runPythonCode(@RequestBody PythonCodeDto pythonCodeDto){
         Map<String,Object> message = new HashMap<>();

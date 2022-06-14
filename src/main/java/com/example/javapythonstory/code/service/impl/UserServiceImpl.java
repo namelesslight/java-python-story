@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
  *  服务实现类
  * </p>
  *
- * @author 
+ * @author ZCL
  * @since 2022-06-08
  */
 @Service
@@ -41,23 +41,41 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Value("${spring.mail.username}")
     private String from;
 
+    //获取邮箱发送列
     @Autowired
     private JavaMailSender jms;
 
     @Autowired
     private RedisTemplate redisTemplate;
 
+    //验证邮箱格式正则
     private static final String EMAIL = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
 
+    /**
+     * <p>
+     *     用户注册
+     * </p>
+     * @param name 用户名
+     * @param email 用户邮箱
+     * @param code 验证码
+     * @param password 密码
+     * @param rwPassword 再次输入密码
+     * @return
+     */
     @Override
     public Map<String, Object> userRegister(String name, String email,String code, String password, String rwPassword) {
         Map<String, Object> registerInfo = new HashMap<>();
         String realCode = (String) RedisUtil.getValue(email);
         Integer registerCode = 1;
+        //判断用户名是否过长
         Boolean nameJudge = nameLen(name);
+        //判断邮箱是否符合格式
         Boolean emailJudge = Pattern.matches(EMAIL, email);
+        //判断验证码是否正确
         Boolean codeJudge = code.equals(realCode);
+        //判断密码是否符合格式
         Boolean passwordJudge = passwordLen(password);
+        //判断再次输入密码是否一致
         Boolean rwPasswordJudge = password.equals(rwPassword);
         if (nameJudge){
             registerInfo.put("nameInfo","用户名合格");
@@ -103,6 +121,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return registerInfo;
     }
 
+    /**
+     * <p>
+     *     发送邮箱验证码
+     * </p>
+     * @param email 邮箱
+     * @return
+     */
     @Override
     public String sendMessage(String email) {
         String code = this.getRandomCode();
@@ -111,10 +136,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             MimeMessage message = null;
             message = jms.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message,true);
+            //设置发送邮箱
             helper.setFrom(from);
+            //设置接收邮箱
             helper.setTo(email);
+            //设置标题信息
             helper.setSubject("Python学习网站");
+            //设置正文信息
             helper.setText("验证码为:" + code);
+            //发送邮件
             jms.send(message);
         }catch (Exception e){
             e.printStackTrace();
@@ -123,6 +153,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return "success";
     }
 
+    /**
+     * <p>
+     *     用户登录
+     * </p>
+     * @param email 邮箱
+     * @param password 密码
+     * @return
+     */
     @Override
     public Map<String, Object> userLogin(String email, String password) {
         Map<String, Object> loginInfo = new HashMap<>();
@@ -145,6 +183,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return loginInfo;
     }
 
+    /**
+     * <p>
+     *     管理员注册
+     * </p>
+     * @param name 用户名
+     * @param password 密码
+     * @param rwPassword 再次输入密码
+     * @return
+     */
     @Override
     public Map<String, Object> adminRegister(String name, String password, String rwPassword) {
         Map<String, Object> registerInfo = new HashMap<>();
@@ -181,6 +228,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return registerInfo;
     }
 
+    /**
+     * <p>
+     *     管理员登录
+     * </p>
+     * @param name 用户名
+     * @param password 密码
+     * @return
+     */
     @Override
     public Map<String, Object> adminLogin(String name, String password) {
         Map<String, Object> loginInfo = new HashMap<>();
@@ -203,18 +258,43 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return loginInfo;
     }
 
+    /**
+     * <p>
+     *    修改用户名
+     * </p>
+     * @param userId 用户编号
+     * @param name 用户名
+     * @return
+     */
     @Override
     public Integer updateUserInfo(Integer userId, String name) {
         Integer updateCode = userMapper.updateUserInfoById(userId, name);
         return updateCode;
     }
 
+    /**
+     * <p>
+     *     修改学习方向
+     * </p>
+     * @param userId 用户编号
+     * @param direction 学习方向编号
+     * @return
+     */
     @Override
     public Integer updateUserDirection(Integer userId, Integer direction) {
         Integer updateCode = userMapper.updateUserDirectionById(userId, direction);
         return updateCode;
     }
 
+    /**
+     * <p>
+     *     用户修改头像
+     * </p>
+     * @param userId 用户编号
+     * @param headPicture 用户头像
+     * @return
+     * @throws IOException
+     */
     @Override
     public Integer updateHeadPicture(Integer userId, MultipartFile headPicture) throws IOException {
 //        String imagePath = "C:/Users/Lenovo/Desktop/image/" + userId;
@@ -225,12 +305,30 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return updateCode;
     }
 
+    /**
+     * <p>
+     *     用户修改邮箱
+     * </p>
+     * @param userId 用户编号
+     * @param email 邮箱
+     * @return
+     */
     @Override
     public Integer updateEmail(Integer userId, String email) {
         Integer updateCode = userMapper.updateEmailById(userId, email);
         return updateCode;
     }
 
+    /**
+     * <p>
+     *     用户修改密码
+     * </p>
+     * @param userId 用户编号
+     * @param oldPassword 旧密码
+     * @param newPassword 新密码
+     * @param rwPassword 再次输入新密码
+     * @return
+     */
     @Override
     public Map<String, Object> updatePassword(Integer userId, String oldPassword, String newPassword, String rwPassword) {
         Map<String, Object> updateInfo = new HashMap<>();
@@ -270,12 +368,26 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return null;
     }
 
+    /**
+     * <P>
+     *     获取单个用户信息
+     * </P>
+     * @param userId 用户编号
+     * @return
+     */
     @Override
     public UserVo queryOneUser(Integer userId) {
         UserVo data = userMapper.queryOneUserById(userId);
         return data;
     }
 
+    /**
+     * <p>
+     *     根据学习路线查询用户信息
+     * </p>
+     * @param directionId 学习路线编号
+     * @return
+     */
     @Override
     public List<UserVo> listUserByDirection(Integer directionId) {
         List<UserVo> data = userMapper.listUsersByDirection(directionId);

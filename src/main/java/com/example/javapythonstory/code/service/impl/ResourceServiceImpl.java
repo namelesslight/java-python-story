@@ -19,7 +19,7 @@ import java.util.Random;
  *  服务实现类
  * </p>
  *
- * @author 
+ * @author ZCL
  * @since 2022-06-08
  */
 @Service
@@ -28,6 +28,16 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
     @Autowired
     private ResourceMapper resourceMapper;
 
+    /**
+     * <p>
+     *     添加资源
+     * </p>
+     * @param userId 用户编号
+     * @param type 资源类型
+     * @param picture 资源
+     * @return
+     * @throws IOException
+     */
     @Override
     public Integer addResource(Integer userId, String type, MultipartFile picture) throws IOException {
         String path = "/usr/local/src/spring/file/image/article_resource/" + createDirName();
@@ -36,6 +46,13 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
         return addCode;
     }
 
+    /**
+     * <p>
+     *     通过资源路径删除资源
+     * </p>
+     * @param resourcePath 资源路径
+     * @return
+     */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Integer deleteResourceByPath(String resourcePath) {
@@ -47,6 +64,13 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
         return deleteCode;
     }
 
+    /**
+     * <p>
+     *     通过资源路径编号资源
+     * </p>
+     * @param resourceId 资源编号
+     * @return
+     */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Integer deleteResourceById(Integer resourceId) {
@@ -59,6 +83,13 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
         return deleteCode;
     }
 
+    /**
+     * <p>
+     *     通过用户编号获取资源
+     * </p>
+     * @param userId 用户编号
+     * @return
+     */
     @Override
     public List<Resource> listResourceByUser(Integer userId) {
         List<Resource> data = resourceMapper.listResourceByUser(userId);

@@ -16,7 +16,7 @@ import java.util.Map;
  *  前端控制器
  * </p>
  *
- * @author 
+ * @author ZCL
  * @since 2022-06-14
  */
 @RestController
@@ -26,6 +26,13 @@ public class SelectController {
     @Autowired
     private SelectService selectService;
 
+    /**
+     * <p>
+     *     添加选项
+     * </p>
+     * @param addSelectDto 添加选项DTO
+     * @return
+     */
     @PostMapping("/super/addSelect")
     public WebResult addSelect(@RequestBody AddSelectDto addSelectDto){
         Map<String, Object> message = new HashMap<>();
@@ -37,6 +44,13 @@ public class SelectController {
         return new WebResult().result200(message, "/super/addSelect");
     }
 
+    /**
+     * <p>
+     *     修改选项
+     * </p>
+     * @param updateSelectDto 修改选项DTO
+     * @return
+     */
     @PostMapping("/super/updateSelect")
     public WebResult updateSelect(@RequestBody UpdateSelectDto updateSelectDto){
         Map<String, Object> message = new HashMap<>();
@@ -48,6 +62,13 @@ public class SelectController {
         return new WebResult().result200(message, "/super/updateSelect");
     }
 
+    /**
+     * <p>
+     *     删除选项
+     * </p>
+     * @param deleteSelectDto 删除选项DTO
+     * @return
+     */
     @PostMapping("/super/deleteSelect")
     public WebResult deleteSelect(@RequestBody DeleteSelectDto deleteSelectDto){
         Map<String, Object> message = new HashMap<>();

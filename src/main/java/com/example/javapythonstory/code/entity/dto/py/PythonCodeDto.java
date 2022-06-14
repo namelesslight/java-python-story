@@ -5,6 +5,9 @@ import lombok.Data;
 @Data
 public class PythonCodeDto {
 
+    /**
+     * python代码
+     */
     private String code;
 
 }

@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  *  服务类
  * </p>
  *
- * @author 
+ * @author ZCL
  * @since 2022-06-08
  */
 public interface ResultService extends IService<Result> {

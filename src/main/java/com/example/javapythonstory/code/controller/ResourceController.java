@@ -19,7 +19,7 @@ import java.util.Map;
  *  前端控制器
  * </p>
  *
- * @author 
+ * @author ZCL
  * @since 2022-06-08
  */
 @RestController
@@ -29,6 +29,15 @@ public class ResourceController {
     @Autowired
     private ResourceService resourceService;
 
+    /**
+     * <p>
+     *     添加资源
+     * </p>
+     * @param userId 添加的用户编号
+     * @param picture 资源
+     * @return
+     * @throws IOException
+     */
     @PostMapping("/common/addResource")
     public WebResult addResource(@RequestParam Integer userId,
                                  @RequestParam MultipartFile picture) throws IOException {
@@ -38,6 +47,13 @@ public class ResourceController {
         return new WebResult().result200(message, "/common/addResource");
     }
 
+    /**
+     * <p>
+     *     通过资源路径删除资源
+     * </p>
+     * @param deleteResourceByPathDto 删除资源DTO
+     * @return
+     */
     @PostMapping("/common/deleteResourceByPath")
     public WebResult deleteResourceByPath(@RequestBody DeleteResourceByPathDto deleteResourceByPathDto){
         Map<String, Object> message = new HashMap<>();
@@ -46,6 +62,13 @@ public class ResourceController {
         return new WebResult().result200(message, "/common/deleteResourceByPath");
     }
 
+    /**
+     * <p>
+     *     通过资源路径编号资源
+     * </p>
+     * @param deleteResourceByIdDto 通过资源路径编号资源DTO
+     * @return
+     */
     @PostMapping("/common/deleteResourceById")
     public WebResult deleteResourceById(@RequestBody DeleteResourceByIdDto deleteResourceByIdDto){
         Map<String, Object> message = new HashMap<>();
@@ -54,6 +77,13 @@ public class ResourceController {
         return new WebResult().result200(message, "/common/deleteResourceById");
     }
 
+    /**
+     * <p>
+     *     通过用户编号获取资源
+     * </p>
+     * @param userId 用户编号
+     * @return
+     */
     @GetMapping("/common/listResourceByUser")
     public WebResult listResourceByUser(@RequestParam Integer userId){
         Map<String, Object> message = new HashMap<>();

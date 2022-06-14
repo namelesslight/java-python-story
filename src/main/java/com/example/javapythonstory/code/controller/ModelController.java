@@ -30,6 +30,13 @@ public class ModelController {
     @Autowired
     private ModelService modelService;
 
+    /**
+     * <p>
+     *     添加模块
+     * </p>
+     * @param addModelDto 添加模块DTO
+     * @return
+     */
     @PostMapping("/super/addModel")
     public WebResult addModel(@RequestBody AddModelDto addModelDto){
         Map<String, Object> message = new HashMap<>();
@@ -38,6 +45,13 @@ public class ModelController {
         return new WebResult().result200(message, "/super/addModel");
     }
 
+    /**
+     * <p>
+     *     修改模块
+     * </p>
+     * @param updateModelDto 修改模块DTO
+     * @return
+     */
     @PostMapping("/super/updateModel")
     public WebResult updateModel(@RequestBody UpdateModelDto updateModelDto){
         Map<String, Object> message = new HashMap<>();
@@ -46,6 +60,13 @@ public class ModelController {
         return new WebResult().result200(message, "/super/updateModel");
     }
 
+    /**
+     * <p>
+     *     删除模块
+     * </p>
+     * @param deleteModelDto 删除模块DTO
+     * @return
+     */
     @PostMapping("/super/deleteModel")
     public WebResult deleteModel(@RequestBody DeleteModelDto deleteModelDto){
         Map<String, Object> message = new HashMap<>();
@@ -54,6 +75,13 @@ public class ModelController {
         return new WebResult().result200(message, "/super/deleteModel");
     }
 
+    /**
+     * <p>
+     *     根据学习方向删除模块
+     * </p>
+     * @param directionId 学习方向DTO
+     * @return
+     */
     @GetMapping("/common/listModelByDirection")
     public WebResult listModelByDirection(@RequestParam Integer directionId){
         Map<String, Object> message = new HashMap<>();
