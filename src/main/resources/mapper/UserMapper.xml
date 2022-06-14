@@ -16,7 +16,7 @@
     </resultMap>
 
     <insert id="addUser">
-        INSERT INTO `tb_user` VALUES(NULL, #{username}, #{password}, '', #{email}, 'common', NULL,NOW(), 0);
+        INSERT INTO `tb_user` VALUES(NULL, #{username}, '', #{password}, '', #{email}, 'common', NULL,NOW(), 0);
     </insert>
 
     <select id="queryCountByEmail" resultType="java.lang.Integer">

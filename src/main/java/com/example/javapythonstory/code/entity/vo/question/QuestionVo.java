@@ -12,6 +12,8 @@ public class QuestionVo {
 
     private String questionContent;
 
+    private Integer modelId;
+
     private List<Select> select;
 
 }

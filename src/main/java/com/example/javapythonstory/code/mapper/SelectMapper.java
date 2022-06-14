@@ -17,6 +17,12 @@ import java.util.List;
 @Mapper
 public interface SelectMapper extends BaseMapper<Select> {
 
+    Integer addSelect(Integer questionId, String content, String code);
+
+    Integer updateSelect(Integer selectId, String content, String code);
+
+    Integer deleteSelect(Integer selectId);
+
     List<Select> listSelectByQuestionId(Integer questionId);
 
 }

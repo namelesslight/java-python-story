@@ -60,7 +60,7 @@ public class QuestionController {
         return new WebResult().result200(message, "/super/updateQuestion");
     }
 
-    @PostMapping("/super/deleteQuestion")
+        @PostMapping("/super/deleteQuestion")
     public WebResult deleteQuestion(@RequestBody DeleteQuestionDto deleteQuestionDto){
         Map<String, Object> message = new HashMap<>();
         Integer deleteCode = questionService.deleteQuestion(deleteQuestionDto.getQuestionId());

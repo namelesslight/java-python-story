@@ -14,11 +14,11 @@
     </resultMap>
 
     <insert id="addTrainingQuestion">
-        INSERT INTO `tb_question` VALUES (NULL, #{content}, #{modelId}, 'ask', #{answer}, NOW(), 0);
+        INSERT INTO `tb_question` VALUES (NULL, #{content}, #{modelId}, 'train', #{answer}, NOW(), 0);
     </insert>
 
     <insert id="addAskQuestion">
-        INSERT INTO `tb_question` VALUES (NULL, #{content}, #{modelId}, 'ask', #{answer}, NOW(), 0);
+        INSERT INTO `tb_question` VALUES (NULL, #{content}, 0, 'ask', #{answer}, NOW(), 0);
     </insert>
 
     <update id="updateQuestion">
@@ -38,13 +38,9 @@
 
     <select id="listQuestionByModel" resultType="com.example.javapythonstory.code.entity.vo.question.QuestionVo">
         SELECT
-               `q_id`,
-               `q_model`,
-               `q_content`,
-               `q_answer`,
-               `q_type`,
-               `create_time`,
-               `is_delete`
+               `q_id` AS `questionId`,
+               `q_model` AS `modelId`,
+               `q_content` AS `questionContent`
         FROM `tb_question`
         WHERE `q_model` = #{modelId}
         AND `is_delete` = 0
@@ -52,13 +48,9 @@
 
     <select id="listQuestionByAsk" resultType="com.example.javapythonstory.code.entity.vo.question.QuestionVo">
         SELECT
-            `q_id`,
-            `q_model`,
-            `q_content`,
-            `q_answer`,
-            `q_type`,
-            `create_time`,
-            `is_delete`
+            `q_id` AS `questionId`,
+            `q_model` AS `modelId`,
+            `q_content` AS `questionContent`
         FROM `tb_question`
         WHERE `q_model` = 0
         AND `is_delete` = 0
@@ -66,13 +58,9 @@
 
     <select id="queryOneQuestionById" resultType="com.example.javapythonstory.code.entity.vo.question.QuestionVo">
         SELECT
-            `q_id`,
-            `q_model`,
-            `q_content`,
-            `q_answer`,
-            `q_type`,
-            `create_time`,
-            `is_delete`
+            `q_id` AS `questionId`,
+            `q_model` AS `modelId`,
+            `q_content` AS `questionContent`
         FROM `tb_question`
         WHERE `q_id` = #{questionId}
         AND `is_delete` = 0

@@ -12,6 +12,22 @@
         <result column="is_delete" property="isDelete" />
     </resultMap>
 
+    <insert id="addSelect">
+        INSERT INTO `tb_select` VALUES (NULL, #{questionId}, #{content}, #{code}, NOW(), 0);
+    </insert>
+
+    <update id="updateSelect">
+        UPDATE `tb_select`
+        SET `s_content` = #{content},
+            `s_code` = #{code}
+        WHERE `s_id` = #{selectId}
+    </update>
+
+    <delete id="deleteSelect">
+        DELETE FROM `tb_select`
+        WHERE `s_id` = #{selectId}
+    </delete>
+
     <select id="listSelectByQuestionId" resultType="com.example.javapythonstory.code.entity.po.Select">
         SELECT
             `s_id`,

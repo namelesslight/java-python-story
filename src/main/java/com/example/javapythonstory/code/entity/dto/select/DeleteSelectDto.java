@@ -4,4 +4,7 @@ import lombok.Data;
 
 @Data
 public class DeleteSelectDto {
+
+    private Integer selectId;
+
 }

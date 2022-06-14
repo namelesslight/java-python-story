@@ -11,7 +11,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        //配置需要拦截的路径
+        //配置需要用户权限的路径
         String[] commonPathPatterns = {
                 "/user/common/**",
                 "/direction/common/**",
@@ -20,21 +20,29 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 "/article/common/**",
                 "/resource/common/**",
                 "/note/common/**",
-                "/video/common/**"
+                "/video/common/**",
+                "/question/common/**",
+                "/select/common/**"
         };
 
+        //配置需要管理员权限的路径
         String[] superPathPatterns = {
                 "/user/super/**",
                 "/direction/super/**",
                 "/model/super/**",
                 "/article/super/**",
-                "/video/super/**"
+                "/video/super/**",
+                "/question/super/**",
+                "/select/super/**"
         };
         //配置不需要拦截的路径
         String[] excludePathPatterns = {
                 "/user/base/**",
                 "/base/**",
-                "/code/base/**"
+                "/code/base/**",
+                "/article/base/**",
+                "/video/base/**",
+                "/direction/base/**"
         };
         registry.addInterceptor(new SuperInterceptor())
                 .addPathPatterns(superPathPatterns)
