@@ -1,0 +1,34 @@
+spring:
+  mail:
+    host: smtp.163.com
+    username: zhaochanglang12@163.com
+    password: BAXEOJCOGGATTGWM
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://106.55.103.152:3306/db_python_learn
+    username: root
+    password: Zcl@220713
+  redis:
+    host: 106.55.103.152
+    port: 6379
+    database: 0
+    password: 123456
+    connect-timeout: 10000
+    jedis:
+      pool:
+        max-active: 8
+
+
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*.xml
+  type-aliases-package: com.example.javapythonstory.code.mapper
+server:
+  port: 8089
