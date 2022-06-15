@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.javapythonstory.code.mapper.BookMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.javapythonstory.code.entity.po.Book">
+        <id column="b_id" property="bId" />
+        <result column="b_name" property="bName" />
+        <result column="b_model" property="bModel" />
+        <result column="b_file" property="bFile" />
+        <result column="b_header" property="bHeader" />
+        <result column="create_time" property="createTime" />
+        <result column="is_delete" property="isDelete" />
+    </resultMap>
+
+    <insert id="addBook">
+        INSERT INTO `tb_book` VALUES(NULL, '', #{modelId}, '', '', '', NOW(), 0, 0);
+    </insert>
+
+    <delete id="cancelCommit">
+        DELETE FROM `tb_book` WHERE `b_id` = #{bookId}
+    </delete>
+
+    <update id="commitBook">
+        UPDATE `tb_book`
+        SET `is_commit` = 1
+        WHERE `b_id` = #{bookId}
+    </update>
+
+    <update id="updateBook">
+        UPDATE `tb_book`
+        SET
+            `b_name` = #{name},
+            `b_introduce` = #{introduce}
+        WHERE `b_id` = #{bookId}
+    </update>
+
+    <update id="updateBookPicture">
+        UPDATE `tb_book`
+        SET `b_header` = #{picture}
+        WHERE `b_id` = #{bookId}
+    </update>
+
+    <update id="updateBookFile">
+        UPDATE `tb_book`
+        SET `b_file` = #{file}
+        WHERE `b_id` = #{bookId}
+    </update>
+
+    <update id="deleteBook">
+        UPDATE `tb_book`
+        SET `is_delete` = 1
+        WHERE `b_id` = #{bookId}
+    </update>
+
+    <select id="listBookByModel" resultType="com.example.javapythonstory.code.entity.po.Book">
+        SELECT
+               `b_id`,
+               `b_name`,
+               `b_model`,
+               `b_file`,
+               `b_header`,
+               `b_introduce`,
+               `create_time`,
+               `is_delete`,
+               `is_commit`
+        FROM `tb_book`
+        WHERE `b_model` = #{modelId}
+        AND `is_delete` = 0
+        AND `is_commit` = 1
+    </select>
+
+    <select id="listUnCommitBook" resultType="com.example.javapythonstory.code.entity.po.Book">
+        SELECT
+            `b_id`,
+            `b_name`,
+            `b_model`,
+            `b_file`,
+            `b_header`,
+            `b_introduce`,
+            `create_time`,
+            `is_delete`,
+            `is_commit`
+        FROM `tb_book`
+        WHERE `b_model` = #{modelId}
+          AND `is_delete` = 0
+          AND `is_commit` = 0
+    </select>
+
+    <select id="queryOneBookById" resultType="com.example.javapythonstory.code.entity.po.Book">
+        SELECT
+            `b_id`,
+            `b_name`,
+            `b_model`,
+            `b_file`,
+            `b_header`,
+            `b_introduce`,
+            `create_time`,
+            `is_delete`,
+            `is_commit`
+        FROM `tb_book`
+        WHERE `b_model` = #{bookId}
+          AND `is_delete` = 0
+    </select>
+</mapper>

@@ -11,8 +11,8 @@ import java.io.IOException;
 /**
  * 设置跨域的监听器
  */
-@WebFilter("/*")
-@Component
+//@WebFilter("/*")
+//@Component
 public class SimpleCORSFilter implements Filter {
 
     @Override

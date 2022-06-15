@@ -21,7 +21,7 @@ public class CodeGenerator {
     private static final String projectPackage = "com.example.javapythonstory";
     //表名数组
     private static final String tables[] = {
-       "tb_select"
+       "tb_book"
     };
     public static void main(String[] args) {
         FastAutoGenerator.create(dbUrl, dbUsername, dbPassword)

@@ -1,6 +1,5 @@
 package com.example.javapythonstory.code.util;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -79,6 +78,40 @@ public class FileUtil {
         //服务器上使用
         String id = path.replace("/usr/local/src/file/","");
         return "/file/video/" + id + "/" + videoName;
+    }
+
+    /**
+     *
+     * @param videoFile 接收前端上传的图片
+     * @param path 服务器储存图片的路径
+     * @return 返回路径，用于前端删除图片
+     * @throws IOException 抛出io流异常
+     */
+    public static String addPdf(MultipartFile videoFile,String path) throws IOException {
+        File videoFolder = new File(path);
+        if (!videoFolder.exists()) {
+            videoFolder.mkdir();
+        }
+        InputStream fis= null;
+        String filePath = null;
+        fis = videoFile.getInputStream();
+        String pdf = videoFile.getName() + ".pdf";
+        filePath = path + "/" + pdf;
+        //服务器上使用
+        File img = new File(filePath);
+        FileOutputStream fos = new FileOutputStream(img);
+        byte[] bytes=new byte[1024*8];
+        int len;
+        while ((len = fis.read(bytes)) != -1){
+            fos.write(bytes,0,len);
+        }
+        fis.close();
+        fos.close();
+        //本地测试使用
+        //return filePath;
+        //服务器上使用
+        String id = path.replace("/usr/local/src/file/","");
+        return "/file/book/" + id + "/" + pdf;
     }
 
     /**

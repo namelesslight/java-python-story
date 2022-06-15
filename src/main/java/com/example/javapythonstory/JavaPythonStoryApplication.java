@@ -7,7 +7,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @SpringBootApplication
 @MapperScan(basePackages = "com.example.javapythonstory.code.mapper")
-@ServletComponentScan
+//@ServletComponentScan
 public class JavaPythonStoryApplication {
     public static void main(String[] args) {
         SpringApplication.run(JavaPythonStoryApplication.class, args);

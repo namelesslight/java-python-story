@@ -1,6 +1,7 @@
 package com.example.javapythonstory.code.config;
 
 import com.example.javapythonstory.code.interceptor.CommonInterceptor;
+import com.example.javapythonstory.code.interceptor.CorsInterceptor;
 import com.example.javapythonstory.code.interceptor.SuperInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -44,6 +45,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 "/video/base/**",
                 "/direction/base/**"
         };
+        registry.addInterceptor(new CorsInterceptor())
+                .addPathPatterns("/**");
         registry.addInterceptor(new SuperInterceptor())
                 .addPathPatterns(superPathPatterns)
                 .excludePathPatterns(excludePathPatterns);
