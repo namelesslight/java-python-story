@@ -1,6 +1,7 @@
 package com.example.javapythonstory.code.controller;
 
 import com.example.javapythonstory.code.result.WebResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,6 +10,7 @@ import java.util.Map;
 
 @RequestMapping("/base")
 @RestController
+@CrossOrigin("*")
 public class ErrorController {
 
     /**

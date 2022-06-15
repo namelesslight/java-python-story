@@ -25,6 +25,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/direction")
+@CrossOrigin("*")
 public class DirectionController {
 
     @Autowired

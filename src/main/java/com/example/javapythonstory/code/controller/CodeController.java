@@ -3,16 +3,14 @@ package com.example.javapythonstory.code.controller;
 import com.example.javapythonstory.code.entity.dto.py.PythonCodeDto;
 import com.example.javapythonstory.code.result.WebResult;
 import com.example.javapythonstory.code.util.PythonRunUtil;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/code")
+@CrossOrigin("*")
 public class CodeController {
 
     /**

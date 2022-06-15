@@ -21,6 +21,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/select")
+@CrossOrigin("*")
 public class SelectController {
 
     @Autowired
