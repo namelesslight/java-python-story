@@ -10,7 +10,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/code")
-@CrossOrigin("*")
 public class CodeController {
 
     /**

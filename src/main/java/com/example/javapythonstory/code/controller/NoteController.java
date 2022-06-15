@@ -23,7 +23,6 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/note")
-@CrossOrigin("*")
 public class NoteController {
     @Autowired
     private NoteService noteService;

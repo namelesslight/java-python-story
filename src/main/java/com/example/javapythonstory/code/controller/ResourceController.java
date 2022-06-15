@@ -24,7 +24,6 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/resource")
-@CrossOrigin("*")
 public class ResourceController {
 
     @Autowired

@@ -25,7 +25,6 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/question")
-@CrossOrigin("*")
 public class QuestionController {
 
     @Autowired

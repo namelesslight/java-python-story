@@ -10,7 +10,6 @@ import java.util.Map;
 
 @RequestMapping("/base")
 @RestController
-@CrossOrigin("*")
 public class ErrorController {
 
     /**

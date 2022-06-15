@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/code/feedback")
-@CrossOrigin("*")
 public class FeedbackController {
 
 }

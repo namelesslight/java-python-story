@@ -27,7 +27,6 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/video")
-@CrossOrigin("*")
 public class VideoController {
 
     @Autowired
