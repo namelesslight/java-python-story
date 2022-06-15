@@ -23,7 +23,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 "/note/common/**",
                 "/video/common/**",
                 "/question/common/**",
-                "/select/common/**"
+                "/select/common/**",
+                "/book/common/**"
         };
 
         //配置需要管理员权限的路径
@@ -34,7 +35,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 "/article/super/**",
                 "/video/super/**",
                 "/question/super/**",
-                "/select/super/**"
+                "/select/super/**",
+                "/book/super/**"
         };
         //配置不需要拦截的路径
         String[] excludePathPatterns = {
@@ -43,10 +45,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 "/code/base/**",
                 "/article/base/**",
                 "/video/base/**",
-                "/direction/base/**"
+                "/direction/base/**",
         };
-        registry.addInterceptor(new CorsInterceptor())
-                .addPathPatterns("/**");
         registry.addInterceptor(new SuperInterceptor())
                 .addPathPatterns(superPathPatterns)
                 .excludePathPatterns(excludePathPatterns);
