@@ -2,6 +2,7 @@ package com.example.javapythonstory.code.service;
 
 import com.example.javapythonstory.code.entity.po.Resource;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.javapythonstory.code.entity.vo.resource.ResourceVo;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -27,7 +28,7 @@ public interface ResourceService extends IService<Resource> {
      * @return
      * @throws IOException
      */
-    Integer addResource(Integer userId, String type, MultipartFile picture) throws IOException;
+    ResourceVo addResource(Integer userId, String type, MultipartFile picture) throws IOException;
 
     /**
      * <p>

@@ -1,6 +1,7 @@
 package com.example.javapythonstory.code.service.impl;
 
 import com.example.javapythonstory.code.entity.po.Resource;
+import com.example.javapythonstory.code.entity.vo.resource.ResourceVo;
 import com.example.javapythonstory.code.mapper.ResourceMapper;
 import com.example.javapythonstory.code.service.ResourceService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -39,11 +41,12 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
      * @throws IOException
      */
     @Override
-    public Integer addResource(Integer userId, String type, MultipartFile picture) throws IOException {
-        String path = "/usr/local/src/spring/file/image/article_resource/" + createDirName();
+    public ResourceVo addResource(Integer userId, String type, MultipartFile picture) throws IOException {
+        String path = "/usr/local/src/spring/file/image/article_resource/" + new Date().getTime();
         String resourcePath = FileUtil.addImg(picture, path);
         Integer addCode = resourceMapper.addResource(userId, type, resourcePath);
-        return addCode;
+        ResourceVo resourceVo = new ResourceVo(addCode, resourcePath);
+        return resourceVo;
     }
 
     /**

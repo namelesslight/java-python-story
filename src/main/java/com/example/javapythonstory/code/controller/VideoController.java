@@ -109,8 +109,8 @@ public class VideoController {
     public WebResult updateVideoPicture(@RequestParam Integer videoId,
                                         @RequestParam MultipartFile picture) throws IOException {
         Map<String, Object> message = new HashMap<>();
-        UpdateVideoPictureInfo updateCode = videoService.updateVideoPicture(videoId, picture);
-        message.put("updateCode", updateCode);
+        UpdateVideoPictureInfo updateInfo = videoService.updateVideoPicture(videoId, picture);
+        message.put("updateInfo",updateInfo);
         return new WebResult().result200(message, "/super/updateVideoPicture");
     }
 

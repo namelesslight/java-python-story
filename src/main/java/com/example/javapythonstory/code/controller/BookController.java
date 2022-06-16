@@ -105,7 +105,7 @@ public class BookController {
      * @return
      * @throws IOException
      */
-    @PostMapping("/super/updateBookPicture")
+        @PostMapping("/super/updateBookPicture")
     public WebResult updateBookPicture(@RequestParam Integer bookId,
                                         @RequestParam MultipartFile picture) throws IOException {
         Map<String, Object> message = new HashMap<>();
@@ -169,7 +169,7 @@ public class BookController {
      * @param modelId 模块编号
      * @return
      */
-    @GetMapping("/super/listUnCommitBook")
+    @GetMapping("/common/listUnCommitBook")
     public WebResult listUnCommitBook(@RequestParam Integer modelId){
         Map<String, Object> message = new HashMap<>();
         List<Book> data = bookService.listUnCommitBook(modelId);

@@ -3,6 +3,7 @@ package com.example.javapythonstory.code.controller;
 import com.example.javapythonstory.code.entity.dto.resource.DeleteResourceByIdDto;
 import com.example.javapythonstory.code.entity.dto.resource.DeleteResourceByPathDto;
 import com.example.javapythonstory.code.entity.po.Resource;
+import com.example.javapythonstory.code.entity.vo.resource.ResourceVo;
 import com.example.javapythonstory.code.result.WebResult;
 import com.example.javapythonstory.code.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +43,8 @@ public class ResourceController {
     public WebResult addResource(@RequestParam Integer userId,
                                  @RequestParam MultipartFile picture) throws IOException {
         Map<String, Object> message = new HashMap<>();
-        Integer addCode = resourceService.addResource(userId,"image" , picture);
-        message.put("addCode", addCode);
+        ResourceVo addInfo = resourceService.addResource(userId,"image" , picture);
+        message.put("addInfo", addInfo);
         return new WebResult().result200(message, "/common/addResource");
     }
 
