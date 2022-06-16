@@ -163,6 +163,21 @@ public class VideoController {
      * <p>
      *     通过视频编号获取单个视频信息
      * </p>
+     * @param modelId 模块编号
+     * @param directionId 学习方向编号
+     * @return
+     */
+    @GetMapping("/common/listVideoByModelAndDirection")
+    public WebResult listVideoByModelAndDirection(@RequestParam Integer modelId,
+                                                  @RequestParam Integer directionId){
+        Map<String, Object> message = new HashMap<>();
+        return new WebResult().result200(message, "/common/queryOneVideoById");
+    }
+
+    /**
+     * <p>
+     *     通过视频编号获取单个视频信息
+     * </p>
      * @param videoId 视频编号
      * @return
      */
@@ -173,5 +188,4 @@ public class VideoController {
         message.put("data", data);
         return new WebResult().result200(message, "/common/queryOneVideoById");
     }
-
 }
