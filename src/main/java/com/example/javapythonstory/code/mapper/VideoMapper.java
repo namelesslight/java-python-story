@@ -86,6 +86,7 @@ public interface VideoMapper extends BaseMapper<Video> {
      */
     List<Video> listVideoByModel(Integer modelId);
 
+
     /**
      * <p>
      *     通过模块获取未提交的视频
@@ -94,6 +95,24 @@ public interface VideoMapper extends BaseMapper<Video> {
      * @return
      */
     List<Video> listUnCommitVideo(Integer modelId);
+
+    /**
+     * <p>
+     *     获取全部视频信息
+     * </p>
+     * @return
+     */
+    List<Video> listVideo();
+
+    /**
+     * <p>
+     *     通过模块编号和学习方向编号获取视频信息
+     * </p>
+     * @param modelId 模块编号
+     * @param directionId 学习方向编号
+     * @return
+     */
+    List<Video> listVideoByModelAndDirection(Integer modelId, Integer directionId);
 
     /**
      * <p>

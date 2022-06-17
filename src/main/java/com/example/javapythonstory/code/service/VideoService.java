@@ -95,6 +95,14 @@ public interface VideoService extends IService<Video> {
      */
     List<Video> listUnCommitVideo(Integer modelId);
 
+    /**
+     * <p>
+     *     通过模块编号和学习方向编号获取视频信息
+     * </p>
+     * @param modelId 模块编号
+     * @param directionId 学习方向编号
+     * @return
+     */
     List<Video> listVideoByModelAndDirection(Integer modelId, Integer directionId);
 
     /**

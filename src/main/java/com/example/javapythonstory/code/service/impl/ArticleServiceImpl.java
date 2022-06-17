@@ -40,6 +40,12 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         return addCode;
     }
 
+    @Override
+    public Integer addProblem(String articleTitle, String articleName, String articleContent) {
+        Integer addCode = articleMapper.addProblem(articleTitle, articleName, articleContent);
+        return addCode;
+    }
+
     /**
      * <p>
      *     修改文章
@@ -91,6 +97,31 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     @Override
     public Article queryOneArticleById(Integer articleId) {
         Article data = articleMapper.queryOneArticleById(articleId);
+        return data;
+    }
+
+    /**
+     * <p>
+     *     获取问题解决方案
+     * </p>
+     * @return
+     */
+    @Override
+    public List<Article> listProblem() {
+        List<Article> data = articleMapper.listProblem();
+        return data;
+    }
+
+    /**
+     * <p>
+     *     通过关键字获取问题解决方案
+     * </p>
+     * @param word
+     * @return
+     */
+    @Override
+    public List<Article> listProblemByWord(String word) {
+        List<Article> data = articleMapper.listProblemByWord(word);
         return data;
     }
 }

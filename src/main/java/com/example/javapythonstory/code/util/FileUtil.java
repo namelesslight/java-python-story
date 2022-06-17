@@ -43,7 +43,7 @@ public class FileUtil {
 //        return filePath;
         //服务器上使用
         String id = path.replace("/usr/local/src/spring/file/image/","");
-        return "/file/image/" + id + "/" + imageName;
+        return "http://106.55.103.152/file/image/" + id + "/" + imageName;
     }
 
     /**
@@ -77,7 +77,7 @@ public class FileUtil {
         //return filePath;
         //服务器上使用
         String id = path.replace("/usr/local/src/file/","");
-        return "/file/video/" + id + "/" + videoName;
+        return "http://106.55.103.152/file/video/" + id + "/" + videoName;
     }
 
     /**
@@ -111,7 +111,7 @@ public class FileUtil {
         //return filePath;
         //服务器上使用
         String id = path.replace("/usr/local/src/file/","");
-        return "/file/book/" + id + "/" + pdf;
+        return "http://106.55.103.152/file/book/" + id + "/" + pdf;
     }
 
     /**

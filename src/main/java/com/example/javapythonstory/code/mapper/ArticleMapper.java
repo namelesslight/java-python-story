@@ -31,6 +31,17 @@ public interface ArticleMapper extends BaseMapper<Article> {
 
     /**
      * <p>
+     *     添加问题
+     * </p>
+     * @param articleName 文章名
+     * @param articleTitle 文章标题
+     * @param articleContent 文章内容
+     * @return
+     */
+    Integer addProblem(String articleTitle, String articleName, String articleContent);
+
+    /**
+     * <p>
      *     修改文章
      * </p>
      * @param articleId 文章编号
@@ -58,6 +69,30 @@ public interface ArticleMapper extends BaseMapper<Article> {
      */
     List<Article> listArticleByModel(Integer modelId);
 
+    /**
+     * <p>
+     *     获取单个文章信息
+     * </p>
+     * @param articleId 模块编号
+     * @return
+     */
     Article queryOneArticleById(Integer articleId);
+
+    /**
+     * <p>
+     *     获取问题解决方案
+     * </p>
+     * @return
+     */
+    List<Article> listProblem();
+
+    /**
+     * <p>
+     *     通过关键字获取问题解决方案
+     * </p>
+     * @param word
+     * @return
+     */
+    List<Article> listProblemByWord(String word);
 
 }

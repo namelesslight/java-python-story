@@ -54,6 +54,47 @@
         WHERE `v_id` = #{videoId}
     </update>
 
+    <select id="listVideo">
+        SELECT
+            `v_id`,
+            `v_name`,
+            `v_model`,
+            `v_picture`,
+            `v_path`,
+            `v_introduce`,
+            `create_time`,
+            `is_delete`,
+            `is_commit`
+        FROM `tb_video`
+          WHERE `is_delete` = 0
+          AND `is_commit` = 1
+    </select>
+
+    <select id="listVideoByModelAndDirection" resultType="com.example.javapythonstory.code.entity.po.Video">
+        SELECT
+            `v`.`v_id` AS `v_id`,
+            `v`.`v_name` AS `v_name`,
+            `v`.`v_model` AS `v_model`,
+            `v`.`v_picture`AS `v_picture`,
+            `v`.`v_path` AS `v_path`,
+            `v`.`v_introduce` AS `v_introduce`,
+            `v`.`create_time` AS `create_time`,
+            `v`.`is_delete` AS `is_delete`,
+            `v`.`is_commit` AS `is_commit`
+        FROM `tb_video` AS `v`
+                 LEFT JOIN `tb_model` AS `m`
+                           ON `v`.`v_model` = `m`.`m_id`
+        WHERE `v`.`is_delete` = 0
+        AND `v`.`is_commit` = 1
+        <if test="modelId != 0">
+            AND `v`.`v_model` = #{modelId}
+        </if>
+        <if test="directionId != 0">
+            AND `m`.`m_direction` = #{directionId}
+        </if>
+
+    </select>
+
     <select id="listVideoByModel" resultType="com.example.javapythonstory.code.entity.po.Video">
         SELECT
             `v_id`,

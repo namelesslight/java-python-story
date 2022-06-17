@@ -150,6 +150,20 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
     /**
      * <p>
+     *     通过模块编号和学习方向编号获取视频信息
+     * </p>
+     * @param modelId 模块编号
+     * @param directionId 学习方向编号
+     * @return
+     */
+    @Override
+    public List<Video> listVideoByModelAndDirection(Integer modelId, Integer directionId) {
+        List<Video> data = videoMapper.listVideoByModelAndDirection(modelId, directionId);
+        return data;
+    }
+
+    /**
+     * <p>
      *     通过视频编号获取单个视频信息
      * </p>
      * @param videoId 视频编号
@@ -161,13 +175,4 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         return data;
     }
 
-    private static String getRandomCode(){
-        Random random = new Random();
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < 6; i++){
-            Integer num = random.nextInt(10);
-            sb.append(num);
-        }
-        return sb.toString();
-    }
 }

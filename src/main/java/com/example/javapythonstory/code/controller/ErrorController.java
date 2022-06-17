@@ -2,6 +2,7 @@ package com.example.javapythonstory.code.controller;
 
 import com.example.javapythonstory.code.result.WebResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -58,6 +59,20 @@ public class ErrorController {
         message.put("code","0");
         message.put("info","未登录");
         return new WebResult().result200(message,"/base/noLogin");
+    }
+
+    @PostMapping("/getImage")
+    public WebResult getImage(){
+        Map<String, Object> message = new HashMap<>();
+        String[] images = {
+                "http://106.55.103.152/file/image/baner/dsj.png",
+                "http://106.55.103.152/file/image/baner/pygj.png",
+                "http://106.55.103.152/file/image/baner/pypc.png",
+                "http://106.55.103.152/file/image/baner/rgzn.png",
+                "http://106.55.103.152/file/image/baner/zdh.png"
+        };
+        message.put("images", images);
+        return new WebResult().result200(message ,"/base/getImage");
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.javapythonstory.code.controller;
 
 import com.example.javapythonstory.code.entity.dto.article.AddArticleDto;
+import com.example.javapythonstory.code.entity.dto.article.AddProblemDto;
 import com.example.javapythonstory.code.entity.dto.article.DeleteArticleDto;
 import com.example.javapythonstory.code.entity.dto.article.UpdateArticleDto;
 import com.example.javapythonstory.code.entity.po.Article;
@@ -46,6 +47,17 @@ public class ArticleController {
                 addArticleDto.getArticleContent());
         message.put("addCode", addCode);
         return new WebResult().result200(message, "/super/addArticle");
+    }
+
+    @PostMapping("/super/addProblem")
+    public WebResult addProblem(@RequestBody AddProblemDto addProblemDto){
+        Map<String, Object> message = new HashMap<>();
+        Integer addCode = articleService.addProblem(
+                addProblemDto.getArticleTitle(),
+                addProblemDto.getArticleName(),
+                addProblemDto.getArticleContent());
+        message.put("addCode", addCode);
+        return new WebResult().result200(message, "/super/addProblem");
     }
 
     /**
@@ -111,5 +123,33 @@ public class ArticleController {
         return new WebResult().result200(message, "/common/queryOneArticleById");
     }
 
+    /**
+     * <p>
+     *     查询问题解决方法
+     * </p>
+     * @return
+     */
+    @GetMapping("/common/listProblem")
+    public WebResult listProblem(){
+        Map<String, Object> message = new HashMap<>();
+        List<Article> data = articleService.listProblem();
+        message.put("data", data);
+        return new WebResult().result200(message, "/common/listProblem");
+    }
+
+    /**
+     * <p>
+     *     通过关键词查询问题解决方法
+     * </p>
+     * @param word 关键词
+     * @return
+     */
+    @GetMapping("/common/listProblemByWord")
+    public WebResult listProblemByWord(@RequestParam String word){
+        Map<String, Object> message = new HashMap<>();
+        List<Article> data = articleService.listProblemByWord(word);
+        message.put("data", data);
+        return new WebResult().result200(message, "/common/listProblemByWord");
+    }
 
 }

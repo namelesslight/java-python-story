@@ -161,7 +161,7 @@ public class VideoController {
 
     /**
      * <p>
-     *     通过视频编号获取单个视频信息
+     *     通过模块编号和学习方向编号获取视频信息
      * </p>
      * @param modelId 模块编号
      * @param directionId 学习方向编号
@@ -171,6 +171,8 @@ public class VideoController {
     public WebResult listVideoByModelAndDirection(@RequestParam Integer modelId,
                                                   @RequestParam Integer directionId){
         Map<String, Object> message = new HashMap<>();
+        List<Video> data = videoService.listVideoByModelAndDirection(modelId, directionId);
+        message.put("data", data);
         return new WebResult().result200(message, "/common/queryOneVideoById");
     }
 
