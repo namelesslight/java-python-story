@@ -61,18 +61,4 @@ public class ErrorController {
         return new WebResult().result200(message,"/base/noLogin");
     }
 
-    @PostMapping("/getImage")
-    public WebResult getImage(){
-        Map<String, Object> message = new HashMap<>();
-        String[] images = {
-                "http://106.55.103.152/file/image/baner/dsj.png",
-                "http://106.55.103.152/file/image/baner/pygj.png",
-                "http://106.55.103.152/file/image/baner/pypc.png",
-                "http://106.55.103.152/file/image/baner/rgzn.png",
-                "http://106.55.103.152/file/image/baner/zdh.png"
-        };
-        message.put("images", images);
-        return new WebResult().result200(message ,"/base/getImage");
-    }
-
 }
