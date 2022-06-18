@@ -10,13 +10,13 @@ import java.util.Collections;
 public class CodeGenerator {
 
     //数据库url
-    private static final String dbUrl = "jdbc:mysql://106.55.103.152:3306/db_python_learn";
+    private static final String dbUrl = "jdbc:mysql:///db_python_learn";
     //数据库driver
     private static final String dbDriverName = "com.mysql.cj.jdbc.Driver";
     //数据库用户名
     private static final String dbUsername = "root";
     //数据库密码
-    private static final String dbPassword = "Zcl@220713";
+    private static final String dbPassword = "";
     //包名
     private static final String projectPackage = "com.example.javapythonstory";
     //表名数组
