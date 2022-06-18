@@ -94,4 +94,12 @@ public interface ArticleService extends IService<Article> {
      */
     List<Article> listProblemByWord(String word);
 
+    /**
+     * <p>
+     *     获取随机六个文章
+     * </p>
+     * @return
+     */
+    List<Article> listArticleByRand();
+
 }

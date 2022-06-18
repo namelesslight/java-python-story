@@ -1,8 +1,6 @@
 package com.example.javapythonstory.code.controller;
 
-import com.example.javapythonstory.code.result.WebResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
+import com.example.javapythonstory.code.result.Result;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,11 +16,11 @@ public class ErrorController {
      * @return
      */
     @RequestMapping("/error")
-    public WebResult error(){
+    public Result error(){
         Map<String,Object> message = new HashMap<>();
         message.put("code","-1");
         message.put("info","token错误，需要重新登录");
-        return new WebResult().result200(message,"/base/error");
+        return new Result().result200(message,"/base/error");
     }
 
     /**
@@ -30,11 +28,11 @@ public class ErrorController {
      * @return
      */
     @RequestMapping("/timeout")
-    public WebResult timeout(){
+    public Result timeout(){
         Map<String,Object> message = new HashMap<>();
         message.put("code","-2");
         message.put("info","错误，token已过期");
-        return new WebResult().result200(message,"/base/timeout");
+        return new Result().result200(message,"/base/timeout");
     }
 
     /**
@@ -42,11 +40,11 @@ public class ErrorController {
      * @return
      */
     @RequestMapping("/noPerm")
-    public WebResult noPerm(){
+    public Result noPerm(){
         Map<String,Object> message = new HashMap<>();
         message.put("code","-3");
         message.put("info","错误，无权限");
-        return new WebResult().result200(message,"/base/noPerm");
+        return new Result().result200(message,"/base/noPerm");
     }
 
     /**
@@ -54,11 +52,11 @@ public class ErrorController {
      * @return
      */
     @RequestMapping("/noLogin")
-    public WebResult noLogin(){
+    public Result noLogin(){
         Map<String,Object> message = new HashMap<>();
         message.put("code","0");
         message.put("info","未登录");
-        return new WebResult().result200(message,"/base/noLogin");
+        return new Result().result200(message,"/base/noLogin");
     }
 
 }

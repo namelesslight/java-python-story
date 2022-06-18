@@ -2,6 +2,7 @@ package com.example.javapythonstory.code.service;
 
 import com.example.javapythonstory.code.entity.po.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.javapythonstory.code.entity.vo.user.UpdateDirectionVo;
 import com.example.javapythonstory.code.entity.vo.user.UserVo;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -90,7 +91,7 @@ public interface UserService extends IService<User> {
      * @param direction 学习方向编号
      * @return
      */
-    Integer updateUserDirection(Integer userId, Integer direction);
+    UpdateDirectionVo updateUserDirection(Integer userId, Integer direction);
 
     /**
      * <p>

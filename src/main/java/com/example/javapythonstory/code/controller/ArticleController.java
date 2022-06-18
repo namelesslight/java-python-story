@@ -5,12 +5,11 @@ import com.example.javapythonstory.code.entity.dto.article.AddProblemDto;
 import com.example.javapythonstory.code.entity.dto.article.DeleteArticleDto;
 import com.example.javapythonstory.code.entity.dto.article.UpdateArticleDto;
 import com.example.javapythonstory.code.entity.po.Article;
-import com.example.javapythonstory.code.result.WebResult;
+import com.example.javapythonstory.code.result.Result;
 import com.example.javapythonstory.code.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +37,7 @@ public class ArticleController {
      * @return
      */
     @PostMapping("/super/addArticle")
-    public WebResult addArticle(@RequestBody AddArticleDto addArticleDto){
+    public Result addArticle(@RequestBody AddArticleDto addArticleDto){
         Map<String, Object> message = new HashMap<>();
         Integer addCode = articleService.addArticle(
                 addArticleDto.getModelId(),
@@ -46,18 +45,18 @@ public class ArticleController {
                 addArticleDto.getArticleTitle(),
                 addArticleDto.getArticleContent());
         message.put("addCode", addCode);
-        return new WebResult().result200(message, "/super/addArticle");
+        return new Result().result200(message, "/super/addArticle");
     }
 
     @PostMapping("/super/addProblem")
-    public WebResult addProblem(@RequestBody AddProblemDto addProblemDto){
+    public Result addProblem(@RequestBody AddProblemDto addProblemDto){
         Map<String, Object> message = new HashMap<>();
         Integer addCode = articleService.addProblem(
                 addProblemDto.getArticleTitle(),
                 addProblemDto.getArticleName(),
                 addProblemDto.getArticleContent());
         message.put("addCode", addCode);
-        return new WebResult().result200(message, "/super/addProblem");
+        return new Result().result200(message, "/super/addProblem");
     }
 
     /**
@@ -68,14 +67,14 @@ public class ArticleController {
      * @return
      */
     @PostMapping("/super/updateArticle")
-    public WebResult updateArticle(@RequestBody UpdateArticleDto updateArticleDto){
+    public Result updateArticle(@RequestBody UpdateArticleDto updateArticleDto){
         Map<String, Object> message = new HashMap<>();
         Integer updateCode = articleService.updateArticle(
                 updateArticleDto.getArticleId(),
                 updateArticleDto.getArticleTitle(),
                 updateArticleDto.getArticleContent());
         message.put("updateCode", updateCode);
-        return new WebResult().result200(message, "/super/updateArticle");
+        return new Result().result200(message, "/super/updateArticle");
     }
 
     /**
@@ -86,11 +85,11 @@ public class ArticleController {
      * @return
      */
     @PostMapping("/super/deleteArticle")
-    public WebResult deleteArticle(@RequestBody DeleteArticleDto deleteArticleDto){
+    public Result deleteArticle(@RequestBody DeleteArticleDto deleteArticleDto){
         Map<String, Object> message = new HashMap<>();
         Integer deleteCode = articleService.deleteArticle(deleteArticleDto.getArticleId());
         message.put("deleteCode", deleteCode);
-        return new WebResult().result200(message, "/super/deleteArticle");
+        return new Result().result200(message, "/super/deleteArticle");
     }
 
     /**
@@ -101,11 +100,11 @@ public class ArticleController {
      * @return
      */
     @GetMapping("/common/listArticleByModel")
-    public WebResult listArticleByModel(@RequestParam Integer modelId){
+    public Result listArticleByModel(@RequestParam Integer modelId){
         Map<String, Object> message = new HashMap<>();
         List<Article> data = articleService.listArticleByModel(modelId);
         message.put("data", data);
-        return new WebResult().result200(message, "/common/listArticleByModel");
+        return new Result().result200(message, "/common/listArticleByModel");
     }
 
     /**
@@ -116,11 +115,11 @@ public class ArticleController {
      * @return
      */
     @GetMapping("/common/queryOneArticleById")
-        public WebResult queryOneArticleById(@RequestParam Integer articleId){
+        public Result queryOneArticleById(@RequestParam Integer articleId){
         Map<String, Object> message = new HashMap<>();
         Article data = articleService.queryOneArticleById(articleId);
         message.put("data", data);
-        return new WebResult().result200(message, "/common/queryOneArticleById");
+        return new Result().result200(message, "/common/queryOneArticleById");
     }
 
     /**
@@ -130,11 +129,11 @@ public class ArticleController {
      * @return
      */
     @GetMapping("/common/listProblem")
-    public WebResult listProblem(){
+    public Result listProblem(){
         Map<String, Object> message = new HashMap<>();
         List<Article> data = articleService.listProblem();
         message.put("data", data);
-        return new WebResult().result200(message, "/common/listProblem");
+        return new Result().result200(message, "/common/listProblem");
     }
 
     /**
@@ -145,11 +144,25 @@ public class ArticleController {
      * @return
      */
     @GetMapping("/common/listProblemByWord")
-    public WebResult listProblemByWord(@RequestParam String word){
+    public Result listProblemByWord(@RequestParam String word){
         Map<String, Object> message = new HashMap<>();
         List<Article> data = articleService.listProblemByWord(word);
         message.put("data", data);
-        return new WebResult().result200(message, "/common/listProblemByWord");
+        return new Result().result200(message, "/common/listProblemByWord");
+    }
+
+    /**
+     * <p>
+     *     获取随机六个文章
+     * </p>
+     * @return
+     */
+    @GetMapping("/common/listArticleByRand")
+    public Result listArticleByRand(){
+        Map<String, Object> message = new HashMap<>();
+        List<Article> data = articleService.listArticleByRand();
+        message.put("data", data);
+        return new Result().result200(message, "/common/listArticleByRand");
     }
 
 }

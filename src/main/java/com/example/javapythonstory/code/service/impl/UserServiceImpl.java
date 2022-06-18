@@ -1,7 +1,10 @@
 package com.example.javapythonstory.code.service.impl;
 
+import com.example.javapythonstory.code.entity.po.Direction;
 import com.example.javapythonstory.code.entity.po.User;
+import com.example.javapythonstory.code.entity.vo.user.UpdateDirectionVo;
 import com.example.javapythonstory.code.entity.vo.user.UserVo;
+import com.example.javapythonstory.code.mapper.DirectionMapper;
 import com.example.javapythonstory.code.mapper.UserMapper;
 import com.example.javapythonstory.code.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -37,6 +40,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private DirectionMapper directionMapper;
 
     @Value("${spring.mail.username}")
     private String from;
@@ -281,9 +287,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * @return
      */
     @Override
-    public Integer updateUserDirection(Integer userId, Integer direction) {
+    public UpdateDirectionVo updateUserDirection(Integer userId, Integer direction) {
         Integer updateCode = userMapper.updateUserDirectionById(userId, direction);
-        return updateCode;
+        Direction d = directionMapper.queryOneDirectionById(direction);
+        Integer directionId = d.getDId();
+        String directionName = d.getDName();
+        UpdateDirectionVo updateInfo = new UpdateDirectionVo(updateCode, directionId, directionName);
+        return updateInfo;
     }
 
     /**

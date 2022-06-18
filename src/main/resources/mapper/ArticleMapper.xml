@@ -66,7 +66,15 @@
         FROM `tb_article`
         WHERE `is_delete` = 0
           AND `a_model` = 0
-          OR `a_title` LIKE CONCAT('%', #{word}, '%')
-          OR `a_content` LIKE CONCAT('%', #{word}, '%')
+          AND `a_title` LIKE CONCAT('%', #{word}, '%')
+    </select>
+
+    <select id="listArticleByRand" resultType="com.example.javapythonstory.code.entity.po.Article">
+        SELECT
+            `a_id`, `a_name`, `a_model`, `a_title`, `a_content`, `create_time`, `is_delete`
+        FROM `tb_article`
+        WHERE `is_delete` = 0
+        ORDER BY RAND()
+        LIMIT 6
     </select>
 </mapper>

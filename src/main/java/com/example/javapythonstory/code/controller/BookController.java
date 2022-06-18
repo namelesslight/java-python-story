@@ -7,7 +7,7 @@ import com.example.javapythonstory.code.entity.dto.book.DeleteBookDto;
 import com.example.javapythonstory.code.entity.dto.book.UpdateBookInfoDto;
 import com.example.javapythonstory.code.entity.po.Book;
 import com.example.javapythonstory.code.entity.vo.book.UpdateBookFileInfo;
-import com.example.javapythonstory.code.result.WebResult;
+import com.example.javapythonstory.code.result.Result;
 import com.example.javapythonstory.code.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -41,11 +41,11 @@ public class BookController {
      * @return
      */
     @PostMapping("/super/addBook")
-    public WebResult addBook(@RequestBody AddBookDto addBookDto){
+    public Result addBook(@RequestBody AddBookDto addBookDto){
         Map<String, Object> message = new HashMap<>();
         Integer addCode = bookService.addBook(addBookDto.getModelId());
         message.put("addCode", addCode);
-        return new WebResult().result200(message, "/super/addBook");
+        return new Result().result200(message, "/super/addBook");
     }
 
     /**
@@ -56,11 +56,11 @@ public class BookController {
      * @return
      */
     @PostMapping("/super/cancelCommitBook")
-    public WebResult cancelCommitBook(@RequestBody CommitBookDto commitBookDto){
+    public Result cancelCommitBook(@RequestBody CommitBookDto commitBookDto){
         Map<String, Object> message = new HashMap<>();
         Integer cancelCode = bookService.cancelCommit(commitBookDto.getBookId());
         message.put("cancelCode", cancelCode);
-        return new WebResult().result200(message, "/super/cancelCommitBook");
+        return new Result().result200(message, "/super/cancelCommitBook");
     }
 
     /**
@@ -71,11 +71,11 @@ public class BookController {
      * @return
      */
     @PostMapping("/super/commitBook")
-    public WebResult commitBook(@RequestBody CommitBookDto commitBookDto){
+    public Result commitBook(@RequestBody CommitBookDto commitBookDto){
         Map<String, Object> message = new HashMap<>();
         Integer commitCode = bookService.commitBook(commitBookDto.getBookId());
         message.put("commitCode", commitCode);
-        return new WebResult().result200(message, "/super/commitBook");
+        return new Result().result200(message, "/super/commitBook");
     }
 
     /**
@@ -86,14 +86,14 @@ public class BookController {
      * @return
      */
     @PostMapping("/super/updateBook")
-    public WebResult updateBook(@RequestBody UpdateBookInfoDto updateBookInfoDto){
+    public Result updateBook(@RequestBody UpdateBookInfoDto updateBookInfoDto){
         Map<String, Object> message = new HashMap<>();
         Integer updateCode = bookService.updateBook(
                 updateBookInfoDto.getBookId(),
                 updateBookInfoDto.getBookName(),
                 updateBookInfoDto.getBookIntroduce());
         message.put("updateCode", updateCode);
-        return new WebResult().result200(message, "/super/updateBook");
+        return new Result().result200(message, "/super/updateBook");
     }
 
     /**
@@ -106,12 +106,12 @@ public class BookController {
      * @throws IOException
      */
         @PostMapping("/super/updateBookPicture")
-    public WebResult updateBookPicture(@RequestParam Integer bookId,
-                                        @RequestParam MultipartFile picture) throws IOException {
+    public Result updateBookPicture(@RequestParam Integer bookId,
+                                    @RequestParam MultipartFile picture) throws IOException {
         Map<String, Object> message = new HashMap<>();
         UpdateBookFileInfo updateInfo = bookService.updateBookPicture(bookId, picture);
         message.put("updateInfo", updateInfo);
-        return new WebResult().result200(message, "/super/updateBookPicture");
+        return new Result().result200(message, "/super/updateBookPicture");
     }
 
     /**
@@ -124,12 +124,12 @@ public class BookController {
      * @throws IOException
      */
     @PostMapping("/super/updateBookFile")
-    public WebResult updateBookFile(@RequestParam Integer bookId,
-                                       @RequestParam MultipartFile file) throws IOException {
+    public Result updateBookFile(@RequestParam Integer bookId,
+                                 @RequestParam MultipartFile file) throws IOException {
         Map<String, Object> message = new HashMap<>();
         UpdateBookFileInfo updateInfo = bookService.updateBookFile(bookId, file);
         message.put("updateInfo", updateInfo);
-        return new WebResult().result200(message, "/super/updateBookFile");
+        return new Result().result200(message, "/super/updateBookFile");
     }
 
     /**
@@ -140,11 +140,11 @@ public class BookController {
      * @return
      */
     @PostMapping("/super/deleteBook")
-    public WebResult deleteBook(@RequestBody DeleteBookDto deleteBookDto){
+    public Result deleteBook(@RequestBody DeleteBookDto deleteBookDto){
         Map<String, Object> message = new HashMap<>();
         Integer deleteCode = bookService.deleteBook(deleteBookDto.getBookId());
         message.put("deleteCode", deleteCode);
-        return new WebResult().result200(message, "/super/deleteBook");
+        return new Result().result200(message, "/super/deleteBook");
     }
 
     /**
@@ -155,11 +155,11 @@ public class BookController {
      * @return
      */
     @GetMapping("/common/listBookByModel")
-    public WebResult listBookByModel(@RequestParam Integer modelId){
+    public Result listBookByModel(@RequestParam Integer modelId){
         Map<String, Object> message = new HashMap<>();
         List<Book> data = bookService.listBookByModel(modelId);
         message.put("data", data);
-        return new WebResult().result200(message, "/common/listBookByModel");
+        return new Result().result200(message, "/common/listBookByModel");
     }
 
     /**
@@ -170,11 +170,11 @@ public class BookController {
      * @return
      */
     @GetMapping("/common/listUnCommitBook")
-    public WebResult listUnCommitBook(@RequestParam Integer modelId){
+    public Result listUnCommitBook(@RequestParam Integer modelId){
         Map<String, Object> message = new HashMap<>();
         List<Book> data = bookService.listUnCommitBook(modelId);
         message.put("data", data);
-        return new WebResult().result200(message, "/super/listUnCommitBook");
+        return new Result().result200(message, "/super/listUnCommitBook");
     }
 
     /**
@@ -185,11 +185,11 @@ public class BookController {
      * @return
      */
     @GetMapping("/common/queryOneBookById")
-    public WebResult queryOneBookById(@RequestParam Integer bookId){
+    public Result queryOneBookById(@RequestParam Integer bookId){
         Map<String, Object> message = new HashMap<>();
         Book data = bookService.queryOneBookById(bookId);
         message.put("data", data);
-        return new WebResult().result200(message, "/common/queryOneBookById");
+        return new Result().result200(message, "/common/queryOneBookById");
     }
 
 }

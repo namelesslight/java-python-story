@@ -2,7 +2,7 @@ package com.example.javapythonstory.code.result;
 
 import java.util.Date;
 
-public class WebResult {
+public class Result {
     private final Integer STATUS_SUCCESS_CODE=200;
     private final Integer STATUS_ILLEGAL_CODE=401;
     private final Integer STATUS_BAN_CODE=403;
@@ -21,9 +21,9 @@ public class WebResult {
     private Object message;
     private String path;
 
-    public WebResult(){}
+    public Result(){}
 
-    public WebResult(Integer statusCode, String info, Date date, Object message, String path) {
+    public Result(Integer statusCode, String info, Date date, Object message, String path) {
         this.statusCode = statusCode;
         this.info = info;
         this.date = date;
@@ -31,20 +31,20 @@ public class WebResult {
         this.path = path;
     }
 
-    public WebResult result200(Object message, String path){
-        return new WebResult(STATUS_SUCCESS_CODE,INFO_SUCCESS,new Date(),message,path);
+    public Result result200(Object message, String path){
+        return new Result(STATUS_SUCCESS_CODE,INFO_SUCCESS,new Date(),message,path);
     }
-    public WebResult result401(Object message, String path){
-        return new WebResult(STATUS_ILLEGAL_CODE,INFO_ILLEGAL,new Date(),message,path);
+    public Result result401(Object message, String path){
+        return new Result(STATUS_ILLEGAL_CODE,INFO_ILLEGAL,new Date(),message,path);
     }
-    public WebResult result403(Object message, String path){
-        return new WebResult(STATUS_BAN_CODE,INFO_BAN,new Date(),message,path);
+    public Result result403(Object message, String path){
+        return new Result(STATUS_BAN_CODE,INFO_BAN,new Date(),message,path);
     }
-    public WebResult result404(Object message, String path){
-        return new WebResult(STATUS_NOT_FOUND_CODE,INFO_NOT_FOUND,new Date(),message,path);
+    public Result result404(Object message, String path){
+        return new Result(STATUS_NOT_FOUND_CODE,INFO_NOT_FOUND,new Date(),message,path);
     }
-    public WebResult result500(Object message, String path){
-        return new WebResult(STATUS_ERROR_CODE,INFO_ERROR,new Date(),message,path);
+    public Result result500(Object message, String path){
+        return new Result(STATUS_ERROR_CODE,INFO_ERROR,new Date(),message,path);
     }
 
     public Integer getStatusCode() {

@@ -124,4 +124,17 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         List<Article> data = articleMapper.listProblemByWord(word);
         return data;
     }
+
+    /**
+     * <p>
+     *     获取随机六个文章
+     * </p>
+     * @return
+     */
+    @Override
+    public List<Article> listArticleByRand() {
+        List<Article> data = articleMapper.listArticleByRand();
+        return data;
+    }
+
 }

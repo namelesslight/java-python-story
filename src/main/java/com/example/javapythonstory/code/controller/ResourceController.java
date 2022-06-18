@@ -4,7 +4,7 @@ import com.example.javapythonstory.code.entity.dto.resource.DeleteResourceByIdDt
 import com.example.javapythonstory.code.entity.dto.resource.DeleteResourceByPathDto;
 import com.example.javapythonstory.code.entity.po.Resource;
 import com.example.javapythonstory.code.entity.vo.resource.ResourceVo;
-import com.example.javapythonstory.code.result.WebResult;
+import com.example.javapythonstory.code.result.Result;
 import com.example.javapythonstory.code.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -40,12 +40,12 @@ public class ResourceController {
      * @throws IOException
      */
     @PostMapping("/common/addResource")
-    public WebResult addResource(@RequestParam Integer userId,
-                                 @RequestParam MultipartFile picture) throws IOException {
+    public Result addResource(@RequestParam Integer userId,
+                              @RequestParam MultipartFile picture) throws IOException {
         Map<String, Object> message = new HashMap<>();
         ResourceVo addInfo = resourceService.addResource(userId,"image" , picture);
         message.put("addInfo", addInfo);
-        return new WebResult().result200(message, "/common/addResource");
+        return new Result().result200(message, "/common/addResource");
     }
 
     /**
@@ -56,11 +56,11 @@ public class ResourceController {
      * @return
      */
     @PostMapping("/common/deleteResourceByPath")
-    public WebResult deleteResourceByPath(@RequestBody DeleteResourceByPathDto deleteResourceByPathDto){
+    public Result deleteResourceByPath(@RequestBody DeleteResourceByPathDto deleteResourceByPathDto){
         Map<String, Object> message = new HashMap<>();
         Integer deleteCode = resourceService.deleteResourceByPath(deleteResourceByPathDto.getResourcePath());
         message.put("deleteCode", deleteCode);
-        return new WebResult().result200(message, "/common/deleteResourceByPath");
+        return new Result().result200(message, "/common/deleteResourceByPath");
     }
 
     /**
@@ -71,11 +71,11 @@ public class ResourceController {
      * @return
      */
     @PostMapping("/common/deleteResourceById")
-    public WebResult deleteResourceById(@RequestBody DeleteResourceByIdDto deleteResourceByIdDto){
+    public Result deleteResourceById(@RequestBody DeleteResourceByIdDto deleteResourceByIdDto){
         Map<String, Object> message = new HashMap<>();
         Integer deleteCode = resourceService.deleteResourceById(deleteResourceByIdDto.getResourceId());
         message.put("deleteCode", deleteCode);
-        return new WebResult().result200(message, "/common/deleteResourceById");
+        return new Result().result200(message, "/common/deleteResourceById");
     }
 
     /**
@@ -86,11 +86,11 @@ public class ResourceController {
      * @return
      */
     @GetMapping("/common/listResourceByUser")
-    public WebResult listResourceByUser(@RequestParam Integer userId){
+    public Result listResourceByUser(@RequestParam Integer userId){
         Map<String, Object> message = new HashMap<>();
         List<Resource> deleteCode = resourceService.listResourceByUser(userId);
         message.put("deleteCode", deleteCode);
-        return new WebResult().result200(message, "/common/listResourceByUser");
+        return new Result().result200(message, "/common/listResourceByUser");
     }
 
 }

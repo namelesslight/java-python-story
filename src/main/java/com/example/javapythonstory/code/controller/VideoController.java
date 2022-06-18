@@ -6,7 +6,7 @@ import com.example.javapythonstory.code.entity.dto.video.DeleteVideoDto;
 import com.example.javapythonstory.code.entity.dto.video.UpdateVideoDto;
 import com.example.javapythonstory.code.entity.po.Video;
 import com.example.javapythonstory.code.entity.vo.video.UpdateVideoPictureInfo;
-import com.example.javapythonstory.code.result.WebResult;
+import com.example.javapythonstory.code.result.Result;
 import com.example.javapythonstory.code.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -40,11 +40,11 @@ public class VideoController {
      * @return
      */
     @PostMapping("/super/addVideo")
-    public WebResult addVideo(@RequestBody AddVideoDto addVideoDto){
+    public Result addVideo(@RequestBody AddVideoDto addVideoDto){
         Map<String, Object> message = new HashMap<>();
         Integer addCode = videoService.addVideo(addVideoDto.getModelId());
         message.put("addCode", addCode);
-        return new WebResult().result200(message, "/super/addVideo");
+        return new Result().result200(message, "/super/addVideo");
     }
 
     /**
@@ -55,11 +55,11 @@ public class VideoController {
      * @return
      */
     @PostMapping("/super/cancelCommit")
-    public WebResult cancelCommit(@RequestBody CommitDto commitDto){
+    public Result cancelCommit(@RequestBody CommitDto commitDto){
         Map<String, Object> message = new HashMap<>();
         Integer cancelCode = videoService.cancelCommit(commitDto.getVideoId());
         message.put("cancelCode", cancelCode);
-        return new WebResult().result200(message, "/super/cancelCommit");
+        return new Result().result200(message, "/super/cancelCommit");
     }
 
     /**
@@ -70,11 +70,11 @@ public class VideoController {
      * @return
      */
     @PostMapping("/super/commitVideo")
-    public WebResult commitVideo(@RequestBody CommitDto commitDto){
+    public Result commitVideo(@RequestBody CommitDto commitDto){
         Map<String, Object> message = new HashMap<>();
         Integer commitCode = videoService.commitVideo(commitDto.getVideoId());
         message.put("commitCode", commitCode);
-        return new WebResult().result200(message, "/super/commitVideo");
+        return new Result().result200(message, "/super/commitVideo");
     }
 
     /**
@@ -85,7 +85,7 @@ public class VideoController {
      * @return
      */
     @PostMapping("/super/updateVideo")
-    public WebResult updateVideo(@RequestBody UpdateVideoDto updateVideoDto){
+    public Result updateVideo(@RequestBody UpdateVideoDto updateVideoDto){
         Map<String, Object> message = new HashMap<>();
         Integer updateCode = videoService.updateVideo(
                 updateVideoDto.getVideoId(),
@@ -93,7 +93,7 @@ public class VideoController {
                 updateVideoDto.getPath(),
                 updateVideoDto.getIntroduce());
         message.put("updateCode", updateCode);
-        return new WebResult().result200(message, "/super/updateVideo");
+        return new Result().result200(message, "/super/updateVideo");
     }
 
     /**
@@ -106,12 +106,12 @@ public class VideoController {
      * @throws IOException
      */
     @PostMapping("/super/updateVideoPicture")
-    public WebResult updateVideoPicture(@RequestParam Integer videoId,
-                                        @RequestParam MultipartFile picture) throws IOException {
+    public Result updateVideoPicture(@RequestParam Integer videoId,
+                                     @RequestParam MultipartFile picture) throws IOException {
         Map<String, Object> message = new HashMap<>();
         UpdateVideoPictureInfo updateInfo = videoService.updateVideoPicture(videoId, picture);
         message.put("updateInfo",updateInfo);
-        return new WebResult().result200(message, "/super/updateVideoPicture");
+        return new Result().result200(message, "/super/updateVideoPicture");
     }
 
     /**
@@ -122,11 +122,11 @@ public class VideoController {
      * @return
      */
     @PostMapping("/super/deleteVideo")
-    public WebResult deleteVideo(@RequestBody DeleteVideoDto deleteVideoDto){
+    public Result deleteVideo(@RequestBody DeleteVideoDto deleteVideoDto){
         Map<String, Object> message = new HashMap<>();
         Integer deleteCode = videoService.deleteVideo(deleteVideoDto.getVideoId());
         message.put("deleteCode", deleteCode);
-        return new WebResult().result200(message, "/super/deleteVideo");
+        return new Result().result200(message, "/super/deleteVideo");
     }
 
     /**
@@ -137,11 +137,11 @@ public class VideoController {
      * @return
      */
     @GetMapping("/common/listVideoByModel")
-    public WebResult listVideoByModel(@RequestParam Integer modelId){
+    public Result listVideoByModel(@RequestParam Integer modelId){
         Map<String, Object> message = new HashMap<>();
         List<Video> data = videoService.listVideoByModel(modelId);
         message.put("data", data);
-        return new WebResult().result200(message, "/common/listVideoByModel");
+        return new Result().result200(message, "/common/listVideoByModel");
     }
 
     /**
@@ -152,11 +152,11 @@ public class VideoController {
      * @return
      */
     @GetMapping("/super/listUnCommitVideo")
-    public WebResult listUnCommitVideo(@RequestParam Integer modelId){
+    public Result listUnCommitVideo(@RequestParam Integer modelId){
         Map<String, Object> message = new HashMap<>();
         List<Video> data = videoService.listUnCommitVideo(modelId);
         message.put("data", data);
-        return new WebResult().result200(message, "/super/listUnCommitVideo");
+        return new Result().result200(message, "/super/listUnCommitVideo");
     }
 
     /**
@@ -168,12 +168,12 @@ public class VideoController {
      * @return
      */
     @GetMapping("/common/listVideoByModelAndDirection")
-    public WebResult listVideoByModelAndDirection(@RequestParam Integer modelId,
-                                                  @RequestParam Integer directionId){
+    public Result listVideoByModelAndDirection(@RequestParam Integer modelId,
+                                               @RequestParam Integer directionId){
         Map<String, Object> message = new HashMap<>();
         List<Video> data = videoService.listVideoByModelAndDirection(modelId, directionId);
         message.put("data", data);
-        return new WebResult().result200(message, "/common/queryOneVideoById");
+        return new Result().result200(message, "/common/queryOneVideoById");
     }
 
     /**
@@ -184,10 +184,10 @@ public class VideoController {
      * @return
      */
     @GetMapping("/common/queryOneVideoById")
-    public WebResult queryOneVideoById(@RequestParam Integer videoId){
+    public Result queryOneVideoById(@RequestParam Integer videoId){
         Map<String, Object> message = new HashMap<>();
         Video data = videoService.queryOneVideoById(videoId);
         message.put("data", data);
-        return new WebResult().result200(message, "/common/queryOneVideoById");
+        return new Result().result200(message, "/common/queryOneVideoById");
     }
 }

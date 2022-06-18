@@ -5,12 +5,11 @@ import com.example.javapythonstory.code.entity.dto.direction.AddDirectionDto;
 import com.example.javapythonstory.code.entity.dto.direction.DeleteDirectionDto;
 import com.example.javapythonstory.code.entity.dto.direction.UpdateDirectionDto;
 import com.example.javapythonstory.code.entity.po.Direction;
-import com.example.javapythonstory.code.result.WebResult;
+import com.example.javapythonstory.code.result.Result;
 import com.example.javapythonstory.code.service.DirectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,11 +37,11 @@ public class DirectionController {
      * @return
      */
     @PostMapping("/super/addDirection")
-    public WebResult addDirection(@RequestBody AddDirectionDto addDirectionDto) {
+    public Result addDirection(@RequestBody AddDirectionDto addDirectionDto) {
         Map<String, Object> message = new HashMap<>();
         Integer addCode = directionService.addDirection(addDirectionDto.getDirectionName());
         message.put("addCode",addCode);
-        return new WebResult().result200(message, "/super/addDirection");
+        return new Result().result200(message, "/super/addDirection");
     }
 
     /**
@@ -53,7 +52,7 @@ public class DirectionController {
      * @return
      */
     @PostMapping("/super/updateDirection")
-    public WebResult updateDirection(@RequestBody UpdateDirectionDto updateDirectionDto) {
+    public Result updateDirection(@RequestBody UpdateDirectionDto updateDirectionDto) {
         Map<String, Object> message = new HashMap<>();
         Integer updateCode = directionService.updateDirection(
                 updateDirectionDto.getDirectionId(),
@@ -61,7 +60,7 @@ public class DirectionController {
         List<Direction> data = directionService.listDirection();
         message.put("updateCode", updateCode);
         message.put("data", data);
-        return new WebResult().result200(message, "/super/updateDirection");
+        return new Result().result200(message, "/super/updateDirection");
     }
 
     /**
@@ -72,13 +71,13 @@ public class DirectionController {
      * @return
      */
     @PostMapping("/super/deleteDirection")
-    public WebResult deleteDirection(@RequestBody DeleteDirectionDto deleteDirectionDto){
+    public Result deleteDirection(@RequestBody DeleteDirectionDto deleteDirectionDto){
         Map<String, Object> message = new HashMap<>();
         Integer deleteCode = directionService.deleteDirection(deleteDirectionDto.getDirectionId());
         List<Direction> data = directionService.listDirection();
         message.put("deleteCode", deleteCode);
         message.put("data", data);
-        return new WebResult().result200(message, "/super/deleteDirection");
+        return new Result().result200(message, "/super/deleteDirection");
     }
 
     /**
@@ -88,11 +87,11 @@ public class DirectionController {
      * @return
      */
     @GetMapping("/common/listDirection")
-    public WebResult listDirection(){
+    public Result listDirection(){
         Map<String, Object> message = new HashMap<>();
         List<Direction> data = directionService.listDirection();
         message.put("data", data);
-        return new WebResult().result200(message, "/common/listDirection");
+        return new Result().result200(message, "/common/listDirection");
     }
 
     /**
@@ -103,11 +102,11 @@ public class DirectionController {
      * @return
      */
     @GetMapping("/common/queryOneDirectionById")
-    public WebResult queryOneDirectionById(@RequestParam Integer directionId){
+    public Result queryOneDirectionById(@RequestParam Integer directionId){
         Map<String, Object> message = new HashMap<>();
         Direction data = directionService.queryOneDirectionById(directionId);
         message.put("data", data);
-        return new WebResult().result200(message, "/common/listDirection");
+        return new Result().result200(message, "/common/listDirection");
     }
 
 }
