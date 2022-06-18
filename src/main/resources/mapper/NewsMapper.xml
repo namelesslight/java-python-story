@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.javapythonstory.code.mapper.NewsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.javapythonstory.code.entity.po.News">
+        <id column="n_id" property="nId" />
+        <result column="n_title" property="nTitle" />
+        <result column="n_content" property="nContent" />
+        <result column="create_time" property="createTime" />
+        <result column="is_delete" property="isDelete" />
+    </resultMap>
+
+    <insert id="addNews">
+        INSERT INTO `tb_news` VALUES (NULL, #{title}, #{content}, NOW(), 0);
+    </insert>
+
+    <update id="updateNews">
+        UPDATE `tb_news`
+        SET
+            `n_title` = #{title},
+            `n_content` = #{content}
+        WHERE `n_id` = #{newsId}
+    </update>
+
+    <update id="deleteNews">
+        UPDATE `tb_news`
+        SET `is_delete` = 1
+        WHERE `n_id` = #{newsId}
+    </update>
+
+    <select id="listNewsByAll" resultType="com.example.javapythonstory.code.entity.po.News">
+        SELECT
+            `n_id`,
+            `n_title`,
+            `n_content`,
+            `create_time`,
+            `is_delete`
+        FROM `tb_news`
+        WHERE `is_delete` = 0
+    </select>
+
+    <select id="listNewsByRand" resultType="com.example.javapythonstory.code.entity.po.News">
+        SELECT
+            `n_id`,
+            `n_title`,
+            `n_content`,
+            `create_time`,
+            `is_delete`
+        FROM `tb_news`
+        WHERE `is_delete` = 0
+        ORDER BY RAND()
+        LIMIT 6
+    </select>
+
+    <select id="queryOneNoteById" resultType="com.example.javapythonstory.code.entity.po.News">
+        SELECT
+            `n_id`,
+            `n_title`,
+            `n_content`,
+            `create_time`,
+            `is_delete`
+        FROM `tb_news`
+        WHERE `n_id` = #{newsId}
+          AND `is_delete` = 0
+    </select>
+
+</mapper>
