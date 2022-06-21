@@ -10,28 +10,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 
-@Component
+
 public class CommonInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token =request.getHeader("Token");
         if (token == null || "".equals(token)){
-            response.sendRedirect(request.getContextPath() + "/base/noLogin");
             return false;
         } else {
             Integer code = JWTUtil.verify(token);
             if (code == 1){
                 String role = JWTUtil.getString(token,"role");
                 if (!("common".equals(role) | "super".equals(role))){
-                    response.sendRedirect(request.getContextPath() + "/base/noPerm");
                     return false;
                 }
             } else if (code == -1){
-                response.sendRedirect(request.getContextPath() + "/base/error");
                 return false;
             } else if (code == -2){
-                response.sendRedirect(request.getContextPath() + "/base/timeout");
                 return false;
             }
         }

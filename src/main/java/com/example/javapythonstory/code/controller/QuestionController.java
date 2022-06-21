@@ -103,7 +103,7 @@ public class QuestionController {
      * @param modelId 通过模块获取对应练习题DTO
      * @return
      */
-    @GetMapping("/common/listQuestionByModel")
+    @GetMapping("/base/listQuestionByModel")
     public Result listQuestionByModel(@RequestParam Integer modelId){
         Map<String, Object> message = new HashMap<>();
         List<QuestionVo> questionInfo = questionService.listQuestionByModel(modelId);
@@ -117,7 +117,7 @@ public class QuestionController {
      * </p>
      * @return
      */
-    @GetMapping("/common/listQuestionByAsk")
+    @GetMapping("/base/listQuestionByAsk")
     public Result listQuestionByAsk(){
         Map<String, Object> message = new HashMap<>();
         List<QuestionVo> questionInfo = questionService.listQuestionByAsk();
@@ -132,7 +132,7 @@ public class QuestionController {
      * @param questionId 问题编号
      * @return
      */
-    @GetMapping("/common/queryOneQuestionById")
+    @GetMapping("/base/queryOneQuestionById")
     public Result queryOneQuestionById(@RequestParam Integer questionId){
         Map<String, Object> message = new HashMap<>();
         QuestionVo questionInfo = questionService.queryOneQuestionById(questionId);

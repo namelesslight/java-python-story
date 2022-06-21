@@ -1,6 +1,7 @@
 package com.example.javapythonstory.code.controller;
 
 import com.example.javapythonstory.code.result.Result;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

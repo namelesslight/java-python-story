@@ -154,7 +154,7 @@ public class BookController {
      * @param modelId 模块编号
      * @return
      */
-    @GetMapping("/common/listBookByModel")
+    @GetMapping("/base/listBookByModel")
     public Result listBookByModel(@RequestParam Integer modelId){
         Map<String, Object> message = new HashMap<>();
         List<Book> data = bookService.listBookByModel(modelId);

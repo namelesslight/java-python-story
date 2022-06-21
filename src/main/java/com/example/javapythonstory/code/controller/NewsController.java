@@ -97,7 +97,7 @@ public class NewsController {
      * </p>
      * @return
      */
-    @GetMapping("/common/listNewsByRand")
+    @GetMapping("/base/listNewsByRand")
     public Result listNewsByRand(){
         Map<String, Object> message = new HashMap<>();
         List<News> data = newsService.listNewsByRand();
@@ -112,7 +112,7 @@ public class NewsController {
      * @param newsId 新闻编号
      * @return
      */
-    @GetMapping("/common/queryOneNewsById")
+    @GetMapping("/base/queryOneNewsById")
     public Result queryOneNewsById(@RequestParam Integer newsId){
         Map<String, Object> message = new HashMap<>();
         News data = newsService.queryOneNoteById(newsId);

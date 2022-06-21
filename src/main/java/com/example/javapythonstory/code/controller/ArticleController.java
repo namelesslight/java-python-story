@@ -114,7 +114,7 @@ public class ArticleController {
      * @param articleId 文章编号
      * @return
      */
-    @GetMapping("/common/queryOneArticleById")
+    @GetMapping("/base/queryOneArticleById")
         public Result queryOneArticleById(@RequestParam Integer articleId){
         Map<String, Object> message = new HashMap<>();
         Article data = articleService.queryOneArticleById(articleId);
@@ -128,7 +128,7 @@ public class ArticleController {
      * </p>
      * @return
      */
-    @GetMapping("/common/listProblem")
+    @GetMapping("/base/listProblem")
     public Result listProblem(){
         Map<String, Object> message = new HashMap<>();
         List<Article> data = articleService.listProblem();
@@ -143,7 +143,7 @@ public class ArticleController {
      * @param word 关键词
      * @return
      */
-    @GetMapping("/common/listProblemByWord")
+    @GetMapping("/base/listProblemByWord")
     public Result listProblemByWord(@RequestParam String word){
         Map<String, Object> message = new HashMap<>();
         List<Article> data = articleService.listProblemByWord(word);

@@ -167,7 +167,7 @@ public class VideoController {
      * @param directionId 学习方向编号
      * @return
      */
-    @GetMapping("/common/listVideoByModelAndDirection")
+    @GetMapping("/base/listVideoByModelAndDirection")
     public Result listVideoByModelAndDirection(@RequestParam Integer modelId,
                                                @RequestParam Integer directionId){
         Map<String, Object> message = new HashMap<>();

@@ -13,21 +13,17 @@ public class SuperInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token =request.getHeader("Token");
         if (token == null || "".equals(token)){
-            response.sendRedirect(request.getContextPath() + "/base/noLogin");
             return false;
         } else {
             Integer code = JWTUtil.verify(token);
             if (code == 1){
                 String role = JWTUtil.getString(token,"role");
                 if (!("super".equals(role))){
-                    response.sendRedirect(request.getContextPath() + "/base/noPerm");
                     return false;
                 }
             } else if (code == -1){
-                response.sendRedirect(request.getContextPath() + "/base/error");
                 return false;
             } else if (code == -2){
-                response.sendRedirect(request.getContextPath() + "/base/timeout");
                 return false;
             }
         }
